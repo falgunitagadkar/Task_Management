@@ -1,0 +1,62 @@
+<div class="parent container">
+    <h4 class="mb-5">Add Task</h4>
+    <form [formGroup]="addTaskForm">
+        <mat-form-field appearance="outline" class="form-field w-100">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" id="title" formControlName="title">
+            <!-- @if (f.email.hasError('email') && !f.email.hasError('required')) {
+                <mat-error>Please enter a valid email address</mat-error>
+              }
+              @if (f.email.hasError('required')) {
+                <mat-error>Email is required</mat-error>
+              } -->
+        </mat-form-field>
+
+        <div>
+        <mat-form-field appearance="outline" class="form-field w-50 me-5">
+            <mat-label>Status</mat-label>
+            <select matNativeControl required>
+              <option value="To Do">To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </mat-form-field>
+       
+          
+          <span>Select Type : </span>
+          <mat-radio-group aria-label="Select Type">
+              <mat-radio-button value="Feature">Feature</mat-radio-button>
+              <mat-radio-button value="Bug">Bug</mat-radio-button>
+              <mat-radio-button value="Enhancement">Enhancement</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <mat-form-field appearance="outline" class="form-field w-50 me-5">
+            <mat-label>Priority</mat-label>
+            <select matNativeControl required>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </mat-form-field>
+
+          <!-- <mat-form-field appearance="outline" class="form-field w-50">
+            <mat-label>Labels</mat-label>
+            <mat-chip-grid #labelChipGrid aria-label="Enter labels">
+            @for (keyword of reactiveKeywords(); track keyword) {
+              <mat-chip-row (removed)="removeReactiveKeyword(keyword)">
+                {{keyword}}
+              <button matChipRemove aria-label="'remove reactive form' + keyword">
+                <mat-icon>cancel</mat-icon>
+              </button>
+              </mat-chip-row>
+            }
+            </mat-chip-grid>
+            <input
+              placeholder="New keyword..."
+              [matChipInputFor]="reactiveChipGrid"
+              (matChipInputTokenEnd)="addReactiveKeyword($event)"
+            />
+          </mat-form-field> -->
+    </form>
+</div>

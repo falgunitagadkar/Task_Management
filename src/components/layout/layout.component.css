@@ -1,0 +1,9 @@
+.bg-secondary
+{
+    background-color: rgb(229, 234, 238) !important;
+}
+
+table
+{
+    --bs-table-bg: transparent;
+}

@@ -1,0 +1,17 @@
+<div style="background-color:rgb(84, 85, 86); height:50px" class="d-flex pt-2 justify-content-between">
+    <div class="d-flex">
+    <!-- <img src="../../assets/images/to-do-icon.png" style="height:25px; width:25px;" class="m-2 ms-2"> -->
+    <h4 class="mt-1 ms-2 text-white">Task Management Application</h4>
+    </div>
+
+    <div class="me-2">
+        <img src="../../assets/images/profile-photo.jpg" class="profile-icon mt-1" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>power_settings_new</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+    </div>
+</div>
+

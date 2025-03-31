@@ -1,0 +1,30 @@
+<div class="background-div d-flex justify-content-center align-items-center">
+    <div class="login-component p-5">
+        <form [formGroup]="loginForm" (submit)="submitForm()">
+            <div class="d-flex align-items-center flex-column">
+            <h3 class="mb-4">Login</h3>
+            <mat-form-field appearance="outline" class="form-field w-100">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" id="email" formControlName="email">
+                @if (f.email.hasError('email') && !f.email.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                  }
+                  @if (f.email.hasError('required')) {
+                    <mat-error>Email is required</mat-error>
+                  }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field w-100">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" id="password" formControlName="password">
+            </mat-form-field>
+
+            <button mat-flat-button type="submit" class="bg-black text-white w-100">Login</button>
+
+            <mat-error *ngIf="!emailAndPasswordMatch" class="mt-2">User with email and password doesn't exist</mat-error>
+            </div>
+        </form>
+    </div>
+</div>
+
+

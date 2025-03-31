@@ -1,0 +1,18 @@
+{
+    "users" : [
+        {
+          "id":1, 
+         "name": "Falguni Tagadkar", 
+         "email":"falgunitagadkar@gmail.com",
+         "password":"falguni@123" 
+        }],
+
+    "tasks" : [
+            { "id": 1, "userId":1, "title": "Learn Angular", "status" : "In Progress" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-02-20" },
+            { "id": 2, "userId":1, "title": "Build a To-Do App", "status" : "In Progress" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-02-20" },
+            { "id": 3, "userId":1, "title": "Task TA-123", "status" : "To Do" , "priority" : "Low" ,"type" : "Enhancement" , "labels" : null , "isActive":true, "dueDate" : "2025-03-25" },
+            { "id": 4, "userId":1, "title": "DE123", "status" : "To Do" , "priority" : "High" ,"type" : "Bug" , "labels" : null , "isActive":true, "dueDate" : "2025-03-20" },
+            { "id": 5, "userId":1, "title": "Add functionality in To-do", "status" : "To Do" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-03-29" },
+            { "id": 6, "userId":1, "title": "Edit functionality in To-do", "status" : "To Do" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-03-29" }
+          ]
+  }

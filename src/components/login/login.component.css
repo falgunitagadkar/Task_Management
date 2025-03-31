@@ -1,0 +1,17 @@
+.background-div
+{
+    background : url("../../assets/images/login-page\ \(2\).jpg") no-repeat center center;
+    background-size:cover;
+    height : 100vh;   
+}
+.login-component
+{
+    border-radius:10px;
+    background-color:rgba(255,255,255,0.7);
+    min-width:400px;
+}
+
+.form-field
+{
+    margin : 10px 0px;
+}

@@ -1,0 +1,34 @@
+<div *ngIf="!noTasks" class="p-5">
+    <div class="d-flex justify-content-end mb-4">
+        <button class="btn btn-sm btn-outline-secondary" routerLink="/add-task">Add Task</button>
+    </div>
+    <table class="table table-hover">
+        <thead class="bg-secondary">
+            <tr>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Type</th>
+              <th>Labels</th>
+              <th>Due Date</th>
+              <th>Is Active</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of taskList">
+              <td>{{ task.title }}</td>
+              <td>{{ task.status }}</td>
+              <td>{{ task.priority }}</td>
+              <td>{{ task.type }}</td>
+              <td>{{ task.labels }}</td>
+              <td>{{ task.dueDate }}</td>
+              <td>{{ task.isActive }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary me-2" (click)="editClicked(task.id)">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteClicked(task.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+    </table>
+</div>
