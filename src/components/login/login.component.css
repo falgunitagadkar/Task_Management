@@ -1,6 +1,6 @@
 .background-div
 {
-    background : url("../../assets/images/login-page\ \(2\).jpg") no-repeat center center;
+    background : url("../../assets/images/login-page.jpg") no-repeat center center;
     background-size:cover;
     height : 100vh;   
 }
@@ -13,5 +13,11 @@
 
 .form-field
 {
-    margin : 10px 0px;
+    margin : 8px 0px;
+}
+
+.login-btn
+{
+    margin-top:10px;
+    height:35px;
 }

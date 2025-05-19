@@ -1,62 +1,96 @@
 <div class="parent container">
-    <h4 class="mb-5">Add Task</h4>
-    <form [formGroup]="addTaskForm">
-        <mat-form-field appearance="outline" class="form-field w-100">
+    <h4 class="mb-5">{{this.isEdit ? 'Edit Task' : 'Add Task'}}</h4>
+    <form [formGroup]="addTaskForm" class="form-container p-0" (submit)="submit()">  
+        <div class="mb-2 row"> 
+        <mat-form-field appearance="outline" class="small-form-field col-sm-6 pe-2">
             <mat-label>Title</mat-label>
             <input matInput type="text" id="title" formControlName="title">
-            <!-- @if (f.email.hasError('email') && !f.email.hasError('required')) {
-                <mat-error>Please enter a valid email address</mat-error>
+            @if (f['title'].hasError('maxLength') && !f['title'].hasError('required')) {
+                <mat-error>Length exceeds 500 characters</mat-error>
               }
-              @if (f.email.hasError('required')) {
-                <mat-error>Email is required</mat-error>
-              } -->
+              @if (f['title'].hasError('required')) {
+                <mat-error>Title is required</mat-error>
+              }
         </mat-form-field>
-
-        <div>
-        <mat-form-field appearance="outline" class="form-field w-50 me-5">
+        
+        <mat-form-field appearance="outline" class="small-form-field col-sm-6">
             <mat-label>Status</mat-label>
-            <select matNativeControl required>
-              <option value="To Do">To Do</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Completed">Completed</option>
-            </select>
+            <mat-select matNativeControl required formControlName="status">
+              <mat-option value="To Do">To Do</mat-option>
+              <mat-option value="In Progress">In Progress</mat-option>
+              <mat-option value="Completed">Completed</mat-option>
+            </mat-select>
+              @if (f['status'].hasError('required')) {
+                <mat-error>Status is required</mat-error>
+              }
           </mat-form-field>
-       
-          
-          <span>Select Type : </span>
-          <mat-radio-group aria-label="Select Type">
-              <mat-radio-button value="Feature">Feature</mat-radio-button>
-              <mat-radio-button value="Bug">Bug</mat-radio-button>
-              <mat-radio-button value="Enhancement">Enhancement</mat-radio-button>
-          </mat-radio-group>
         </div>
-
-        <mat-form-field appearance="outline" class="form-field w-50 me-5">
+          
+        <div class="row mb-3">
+          <mat-form-field appearance="outline" class="small-form-field col-sm-4">
             <mat-label>Priority</mat-label>
-            <select matNativeControl required>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
+            <mat-select matNativeControl required formControlName="priority">
+              <mat-option value="High">High</mat-option>
+              <mat-option value="Medium">Medium</mat-option>
+              <mat-option value="Low">Low</mat-option>
+            </mat-select>
+            @if (f['priority'].hasError('required')) {
+                <mat-error>Priority is required</mat-error>
+              }
           </mat-form-field>
+          
+          
+           <mat-form-field appearance="outline" class="small-form-field col-sm-4">
+              <mat-label>Due date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dueDate">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              @if (f['dueDate'].hasError('required')) {
+                <mat-error>DueDate is required</mat-error>
+              }
+            </mat-form-field>
 
-          <!-- <mat-form-field appearance="outline" class="form-field w-50">
+            <div class="col-sm-4">
+            <span>Type: </span>      
+              <mat-radio-group aria-label="Select Type" class="d-flex" formControlName="type">
+                  <mat-radio-button value="Feature">Feature</mat-radio-button>
+                  <mat-radio-button value="Bug">Bug</mat-radio-button>
+                  <mat-radio-button value="Enhancement">Enhancement</mat-radio-button>
+              </mat-radio-group>
+              @if (f['type'].hasError('required')) {
+                <mat-error>Type is required</mat-error>
+              }
+          </div>
+        </div> 
+        
+        <mat-form-field appearance="outline" class="small-form-field w-100">
             <mat-label>Labels</mat-label>
             <mat-chip-grid #labelChipGrid aria-label="Enter labels">
-            @for (keyword of reactiveKeywords(); track keyword) {
-              <mat-chip-row (removed)="removeReactiveKeyword(keyword)">
+            @for (keyword of addTaskForm.controls['labels'].value; track keyword) {
+              <mat-chip-row (removed)="removeLabel(keyword)">
                 {{keyword}}
-              <button matChipRemove aria-label="'remove reactive form' + keyword">
+              <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
               </mat-chip-row>
             }
             </mat-chip-grid>
             <input
-              placeholder="New keyword..."
-              [matChipInputFor]="reactiveChipGrid"
-              (matChipInputTokenEnd)="addReactiveKeyword($event)"
+              placeholder="New label..."
+              [matChipInputFor]="labelChipGrid"
+              (matChipInputTokenEnd)="addLabel($event)"
             />
-          </mat-form-field> -->
+          </mat-form-field> 
+          
+          <div class="form-check form-switch">
+              <label class="form-check-label" for="flexSwitchCheckDisabled">Is Active</label>
+               <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" formControlName="isActive">
+          </div>
+
+          <div class="d-flex justify-content-end">
+          <button type="submit" class="btn me-2 text-white" style="background-color:#673ab7">{{this.isEdit ? 'Save' : 'Add'}}</button>
+          <button type="button" class="btn btn-secondary" routerLink="/list">Cancel</button>
+          </div>
     </form>
 </div>

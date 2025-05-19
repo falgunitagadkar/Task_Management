@@ -1,0 +1,32 @@
+.page-size
+{
+    width:50px; 
+    height:30px; 
+    border:0.5px solid #673ab7; 
+    border-radius:3px;
+}
+
+.page-size:focus {
+    border: 0.5px solid #673ab7;
+    outline: none;
+    box-shadow: 0 0 5px #311b57;
+    border-radius: 4px; 
+  }
+
+  ::ng-deep .ngx-pagination .current 
+  {
+    background: #673ab7 !important;
+    color:white
+  }
+
+.mat-icon
+{
+    height:20px !important;
+    width:20px !important;
+}
+
+input:focus
+{
+    border-color:rgb(187,187,187) !important;
+    outline:none !important;
+}

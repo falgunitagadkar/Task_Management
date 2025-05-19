@@ -1,0 +1,69 @@
+@use '@angular/material' as mat;
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Set a global density (e.g., -2 for smallest)
+@include mat.core();
+$density-level: -2; // Possible values: 0 (default), -1, -2, -3
+
+@include mat.all-component-densities($density-level);
+
+:root {
+    --mat-form-field-container-height: 40px;
+    --mat-form-field-filled-label-display: none;
+    --mat-form-field-container-vertical-padding: 10px;
+    --mat-form-field-filled-with-label-container-padding-top: 8px;
+    --mat-form-field-filled-with-label-container-padding-bottom: 8px;
+    --mat-form-field-container-text-size: 14px;
+    --mdc-outlined-text-field-label-text-size:14px;
+    --mat-select-trigger-text-size:14px;
+}
+
+.mdc-text-field--outlined
+{
+    padding-right:8px !important;
+    padding-left:8px !important;
+}
+.mat-mdc-option:hover {
+    background-color:#673ab7 !important;
+    color:white;
+    --mat-option-selected-state-label-text-color:white;
+}
+
+.mat-mdc-radio-button.mat-accent 
+{
+--mdc-radio-selected-focus-icon-color:#673ab7 !important;
+--mdc-radio-selected-hover-icon-color:#673ab7 !important;
+--mdc-radio-selected-icon-color:#673ab7 !important;
+--mdc-radio-selected-pressed-icon-color:#673ab7 !important;
+--mat-radio-checked-ripple-color:#673ab7 !important;
+}
+
+.mat-mdc-select-panel {
+max-height: 200px !important; 
+}
+  
+.mat-mdc-option {
+height: 32px !important;
+padding: 4px 12px !important; 
+font-size: 14px !important;
+}
+
+.button-primary
+{
+    background-color:#673ab7;
+    color:white;
+}
+
+.button-outline-primary
+{
+    border-color:#673ab7 !important;
+    color:#673ab7 !important; 
+}
+
+.button-outline-primary:hover
+{
+    background-color:#673ab7 !important;
+    color:white !important;
+}

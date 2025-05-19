@@ -1,6 +1,6 @@
 export interface ITask
 {
-    id : number;
+    id : string;
     userId : number;
     title : string;
     status : "To Do" | "In Progess" | "Completed";
@@ -8,8 +8,21 @@ export interface ITask
     type : "Bug" | "Feature" | "Enhancement";
     labels : string[] | null;
     isActive : boolean;
-    description : null;
-    dueDate : Date;
+    description? : null;
+    dueDate : string;
+}
+
+export interface IEditTask
+{
+    userId : number;
+    title : string;
+    status : "To Do" | "In Progess" | "Completed";
+    priority : "High" | "Medium" | "Low";
+    type : "Bug" | "Feature" | "Enhancement";
+    labels : string[] | null;
+    isActive : boolean;
+    description? : null;
+    dueDate : string;
 }
 
 export interface TaskResponse

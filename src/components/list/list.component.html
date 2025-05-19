@@ -1,34 +1,71 @@
 <div *ngIf="!noTasks" class="p-5">
     <div class="d-flex justify-content-end mb-4">
-        <button class="btn btn-sm btn-outline-secondary" routerLink="/add-task">Add Task</button>
+ 
+            <input matInput placeholder="Search..." type="text" id="title" class="me-2" [(ngModel)]="searchText" (input)="filterItems()">
+        
+        <button class="btn btn-sm button-outline-primary" routerLink="/add-task">+ Add Task</button>
     </div>
     <table class="table table-hover">
-        <thead class="bg-secondary">
+        <thead class="">
             <tr>
-              <th>Title</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Type</th>
-              <th>Labels</th>
-              <th>Due Date</th>
-              <th>Is Active</th>
+              <th (click)="sortTasks(taskListFiltered,'title',!sortOrder)">Title
+                    <mat-icon *ngIf="sortBy === 'title' && sortOrder">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="sortBy === 'title' && !sortOrder">arrow_upward</mat-icon>
+              </th>
+              <th (click)="sortTasks(taskListFiltered,'status',!sortOrder)">Status
+                    <mat-icon *ngIf="sortBy === 'status' && sortOrder">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="sortBy === 'status' && !sortOrder">arrow_upward</mat-icon>
+              </th>
+              <th (click)="sortTasks(taskListFiltered,'priority',!sortOrder)">Priority
+                    <mat-icon *ngIf="sortBy === 'priority' && sortOrder">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="sortBy === 'priority' && !sortOrder">arrow_upward</mat-icon>
+              </th>
+              <th (click)="sortTasks(taskListFiltered,'type',!sortOrder)">Type
+                    <mat-icon *ngIf="sortBy === 'type' && sortOrder">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="sortBy === 'type' && !sortOrder">arrow_upward</mat-icon>
+              </th>
+              <th>Labels
+              </th>
+              <th (click)="sortTasks(taskListFiltered,'dueDate',!sortOrder)">Due Date
+                    <mat-icon *ngIf="sortBy === 'dueDate' && sortOrder">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="sortBy === 'dueDate' && !sortOrder">arrow_upward</mat-icon>
+              </th>
+              <th (click)="sortTasks(taskListFiltered,'isActive',!sortOrder)">Is Active
+                    <mat-icon *ngIf="sortBy === 'isActive' && sortOrder">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="sortBy === 'isActive' && !sortOrder">arrow_upward</mat-icon>
+              </th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let task of taskList">
+            <tr *ngFor="let task of taskListFiltered | paginate : { itemsPerPage: itemsEachPage, currentPage: page }">
               <td>{{ task.title }}</td>
               <td>{{ task.status }}</td>
               <td>{{ task.priority }}</td>
               <td>{{ task.type }}</td>
-              <td>{{ task.labels }}</td>
+              <td>
+                <mat-chip-set>
+                    <mat-chip *ngFor="let label of task.labels">{{ label }}</mat-chip>
+                </mat-chip-set>
+              </td>
               <td>{{ task.dueDate }}</td>
               <td>{{ task.isActive }}</td>
               <td>
-                <button class="btn btn-sm btn-outline-secondary me-2" (click)="editClicked(task.id)">Edit</button>
+                <div class="d-flex">
+                <button class="btn btn-sm button-outline-primary me-2" [routerLink]="['/edit-task',task.id]">Edit</button>
                 <button class="btn btn-sm btn-outline-danger" (click)="deleteClicked(task.id)">Delete</button>
+                </div>
               </td>
             </tr>
           </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+    <div class="mt-1">Showing {{firstItem}} - {{lastItem}} of {{taskListFiltered.length}} records</div>
+    <pagination-controls previousLabel="Prev" nextLabel="Next"(pageChange)="pageNumberChange($event)"></pagination-controls>
+    <select value="5" class="page-size" [(ngModel)]="itemsEachPage" (change)="calculateFirstAndLastItems()">
+        <option value="5">5</option>
+        <option value="10" [disabled]="taskListFiltered.length-10*(page-1) <= 0">10</option>
+        <option value="20" [disabled]="taskListFiltered.length-20*(page-1) <= 0">20</option>
+      </select>
+    </div>
 </div>

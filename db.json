@@ -1,18 +1,186 @@
 {
-    "users" : [
-        {
-          "id":1, 
-         "name": "Falguni Tagadkar", 
-         "email":"falgunitagadkar@gmail.com",
-         "password":"falguni@123" 
-        }],
-
-    "tasks" : [
-            { "id": 1, "userId":1, "title": "Learn Angular", "status" : "In Progress" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-02-20" },
-            { "id": 2, "userId":1, "title": "Build a To-Do App", "status" : "In Progress" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-02-20" },
-            { "id": 3, "userId":1, "title": "Task TA-123", "status" : "To Do" , "priority" : "Low" ,"type" : "Enhancement" , "labels" : null , "isActive":true, "dueDate" : "2025-03-25" },
-            { "id": 4, "userId":1, "title": "DE123", "status" : "To Do" , "priority" : "High" ,"type" : "Bug" , "labels" : null , "isActive":true, "dueDate" : "2025-03-20" },
-            { "id": 5, "userId":1, "title": "Add functionality in To-do", "status" : "To Do" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-03-29" },
-            { "id": 6, "userId":1, "title": "Edit functionality in To-do", "status" : "To Do" , "priority" : "High" ,"type" : "Feature" , "labels" : null , "isActive":true, "dueDate" : "2025-03-29" }
-          ]
-  }
+  "users": [
+    {
+      "id": "1",
+      "name": "Falguni Tagadkar",
+      "email": "falgunitagadkar@gmail.com",
+      "password": "falguni@123"
+    }
+  ],
+  "tasks": [
+    {
+      "userId": 1,
+      "title": "Build a To-Do App",
+      "status": "In Progress",
+      "type": "Feature",
+      "priority": "High",
+      "labels": [
+        "dsdsad",
+        "fdsfsjfhskjfdskfdhfjsfchzf",
+        "dsdadaa",
+        "jgjgj"
+      ],
+      "dueDate": "2025-02-20",
+      "isActive": true,
+      "id": "2"
+    },
+    {
+      "userId": 1,
+      "title": "sadad",
+      "status": "In Progress",
+      "type": "Feature",
+      "priority": "High",
+      "labels": [
+        "ddssfsdfsf",
+        "dsad"
+      ],
+      "dueDate": "2025-04-02",
+      "isActive": true,
+      "id": "5"
+    },
+    {
+      "userId": 1,
+      "title": "Dummy",
+      "status": "To Do",
+      "type": "Bug",
+      "priority": "High",
+      "labels": [
+        "fsf",
+        "sdadad"
+      ],
+      "dueDate": "2025-04-03",
+      "isActive": false,
+      "id": "1"
+    },
+    {
+      "userId": 1,
+      "title": "Helloooooooooo",
+      "status": "In Progress",
+      "type": "Feature",
+      "priority": "High",
+      "labels": [
+        "dummy",
+        "new"
+      ],
+      "dueDate": "2025-04-06",
+      "isActive": true,
+      "id": "9"
+    },
+    {
+      "userId": 1,
+      "title": "New task",
+      "status": "In Progress",
+      "type": "Feature",
+      "priority": "Low",
+      "labels": [
+        "hi"
+      ],
+      "dueDate": "2025-04-03",
+      "isActive": true,
+      "id": "10"
+    },
+    {
+      "userId": 1,
+      "title": "test",
+      "status": "In Progress",
+      "type": "Enhancement",
+      "priority": "Medium",
+      "labels": [
+        "label"
+      ],
+      "dueDate": "2025-04-16",
+      "isActive": true,
+      "id": "11"
+    },
+    {
+      "userId": 1,
+      "title": "sda",
+      "status": "In Progress",
+      "type": "Feature",
+      "priority": "High",
+      "labels": [
+        "fsf"
+      ],
+      "dueDate": "2025-04-04",
+      "isActive": true,
+      "id": "13"
+    },
+    {
+      "id": "14",
+      "userId": 1,
+      "title": "Test 4.4",
+      "status": "In Progress",
+      "type": "Bug",
+      "priority": "Medium",
+      "labels": [
+        "new label"
+      ],
+      "dueDate": "2025-04-11",
+      "isActive": true
+    },
+    {
+      "id": "15",
+      "userId": 1,
+      "title": "new task 4.4",
+      "status": "In Progress",
+      "type": "Enhancement",
+      "priority": "Medium",
+      "labels": [
+        "label"
+      ],
+      "dueDate": "2025-04-04",
+      "isActive": true
+    },
+    {
+      "id": "17",
+      "userId": 1,
+      "title": "nhtyyhghfgdfv",
+      "status": "In Progress",
+      "type": "Feature",
+      "priority": "Medium",
+      "labels": [
+        "gkjggh"
+      ],
+      "dueDate": "2025-04-04",
+      "isActive": true
+    },
+    {
+      "userId": 1,
+      "title": "werrewr",
+      "status": "Completed",
+      "type": "Feature",
+      "priority": "Medium",
+      "labels": [],
+      "dueDate": "2025-04-04",
+      "isActive": true,
+      "id": "18"
+    },
+    {
+      "userId": 1,
+      "title": "New task",
+      "status": "To Do",
+      "type": "Bug",
+      "priority": "High",
+      "labels": [
+        "dfsfsf",
+        "gg"
+      ],
+      "dueDate": "2025-05-06",
+      "isActive": true,
+      "id": "19"
+    },
+    {
+      "id": "20",
+      "userId": 1,
+      "title": "dummy",
+      "status": "In Progress",
+      "type": "Bug",
+      "priority": "High",
+      "labels": [
+        "dfsfsff"
+      ],
+      "dueDate": "2025-05-02",
+      "isActive": true
+    }
+  ]
+}

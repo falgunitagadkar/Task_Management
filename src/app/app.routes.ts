@@ -4,6 +4,7 @@ import { LayoutComponent } from '../components/layout/layout.component';
 import { AuthGuardService } from '../services/authguard.service';
 import { AddTaskComponent } from '../components/add-task/add-task.component';
 import { ListComponent } from '../components/list/list.component';
+import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     {   
@@ -15,8 +16,9 @@ export const routes: Routes = [
         path:'', 
         component:LayoutComponent,
         children: [
-            { path: 'list', component: ListComponent }, // Default Route
-            { path: 'add-task', component: AddTaskComponent },
+            { path: 'list', component: ListComponent, canActivate:[AuthGuardService] }, // Default Route
+            { path: 'add-task', component: AddTaskComponent, canActivate:[AuthGuardService] },
+            { path: 'edit-task/:id', component: AddTaskComponent, canActivate:[AuthGuardService]}
           ],
     },
     {
@@ -33,5 +35,8 @@ export const routes: Routes = [
         path:'edit-task/:id',
         component:AddTaskComponent,
         canActivate:[AuthGuardService]
+    },
+    {    path: '**', 
+        component:PageNotFoundComponent
     }
 ];
