@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ILogin, IUser } from '../models/login';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class AuthService {
   private userLoggedIn: boolean = this.checkUserLoggedIn();
   private userLoggedInSubject = new BehaviorSubject<boolean>(this.userLoggedIn);
-  private apiUrl = 'http://localhost:3000';
+  // private apiUrl = 'http://localhost:3000';
   users!: IUser[];
 
   constructor(private http: HttpClient) {
@@ -23,7 +24,7 @@ export class AuthService {
   }
 
   getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(this.apiUrl + '/users');
+    return this.http.get<IUser[]>(`${environment.apiUrl}/users`);
   }
 
   login(userCred: ILogin): boolean {
