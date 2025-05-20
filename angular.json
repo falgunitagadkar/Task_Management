@@ -21,7 +21,8 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets/images"
+              "src/assets/images",
+              "src/netlify"
             ],
             "styles": [
               "src/styles.scss",
