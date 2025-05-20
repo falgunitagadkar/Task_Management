@@ -12,23 +12,23 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getTaskListByUserId(userId: number): Observable<ITask[]> {
-    return this.http.get<ITask[]>(`${environment.apiUrl}` + '?userId=' + userId);
+    return this.http.get<ITask[]>(`${environment.apiUrl}/tasks` + '?userId=' + userId);
   }
 
   getTaskById(id: number) {
-    return this.http.get<ITask>(`${environment.apiUrl}` + '/' + id);
+    return this.http.get<ITask>(`${environment.apiUrl}/tasks` + '/' + id);
   }
 
   deleteTaskById(id: string) {
-    return this.http.delete(`${environment.apiUrl}` + '/' + id);
+    return this.http.delete(`${environment.apiUrl}/tasks` + '/' + id);
   }
 
   addTask(task: ITask) {
-    return this.http.post(`${environment.apiUrl}`,task);
+    return this.http.post(`${environment.apiUrl}/tasks`,task);
   }
 
   editTask(id:string,task : IEditTask)
   {
-    return this.http.put(`${environment.apiUrl}` + '/' + id, task);
+    return this.http.put(`${environment.apiUrl}/tasks` + '/' + id, task);
   }
 }
