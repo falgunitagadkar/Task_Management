@@ -22,7 +22,11 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/assets/images",
-              "src/netlify"
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "./"
+              }
             ],
             "styles": [
               "src/styles.scss",
