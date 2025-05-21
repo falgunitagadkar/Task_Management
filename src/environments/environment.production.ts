@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://your-json-server.onrender.com'
+    apiUrl: 'https://task-management-backend.glitch.me'
   };
