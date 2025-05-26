@@ -1,9 +1,12 @@
 @use '@angular/material' as mat;
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '../src/assets/styles/theme.scss';
+@import '../src/assets/styles/button.scss';
+@import '../src/assets/styles/common.scss';
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// Set a global density (e.g., -2 for smallest)
 @include mat.core();
 $density-level: -2; // Possible values: 0 (default), -1, -2, -3
 
@@ -26,14 +29,14 @@ $density-level: -2; // Possible values: 0 (default), -1, -2, -3
     padding-left:8px !important;
 }
 .mat-mdc-option:hover {
-    background-color:#673ab7 !important;
+    background-color:#683ab7 !important;
     color:white;
     --mat-option-selected-state-label-text-color:white;
 }
 
 .mat-mdc-radio-button.mat-accent 
 {
---mdc-radio-selected-focus-icon-color:#673ab7 !important;
+--mdc-radio-selected-focus-icon-color:#c9c5d0 !important;
 --mdc-radio-selected-hover-icon-color:#673ab7 !important;
 --mdc-radio-selected-icon-color:#673ab7 !important;
 --mdc-radio-selected-pressed-icon-color:#673ab7 !important;
@@ -50,20 +53,3 @@ padding: 4px 12px !important;
 font-size: 14px !important;
 }
 
-.button-primary
-{
-    background-color:#673ab7;
-    color:white;
-}
-
-.button-outline-primary
-{
-    border-color:#673ab7 !important;
-    color:#673ab7 !important; 
-}
-
-.button-outline-primary:hover
-{
-    background-color:#673ab7 !important;
-    color:white !important;
-}

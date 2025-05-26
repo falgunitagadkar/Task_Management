@@ -1,0 +1,33 @@
+.header
+{
+   background-color:white;
+   height:3rem;
+   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+h1
+{
+    font-size:clamp(2rem, 2.5vw, 3rem) !important;
+    color:var(--var-secondary-color) !important;
+}
+
+h2
+{
+    font-size:clamp(1.5rem, 2.5vw, 2rem) !important;
+    color:var(--var-secondary-color) !important;
+}
+
+.background-primary
+{
+    background-color: var(--var-primary-color);
+}
+
+.text-primary
+{
+    color:var(--var-primary-color);
+}
+
+.text-secondary
+{
+    color:var(--var-secondary-color);
+}

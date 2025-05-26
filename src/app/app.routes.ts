@@ -5,11 +5,12 @@ import { AuthGuardService } from '../services/authguard.service';
 import { AddTaskComponent } from '../components/add-task/add-task.component';
 import { ListComponent } from '../components/list/list.component';
 import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
+import { LandingPageComponent } from '../components/landing-page/landing-page.component';
 
 export const routes: Routes = [
     {   
         path:'' , 
-        redirectTo:'/login', 
+        component:LandingPageComponent, 
         pathMatch:'full'
     },
     {   

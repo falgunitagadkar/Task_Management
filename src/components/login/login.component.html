@@ -1,4 +1,7 @@
-<div class="background-div d-flex justify-content-center align-items-center">
+<div class="d-flex row h-100">
+<div class="col-sm-12 col-md-6 h-100">
+  <h4 class="mt-1 ms-2 mt-2 text-primary">Task Stack</h4>
+  <div class="d-flex justify-content-center align-items-center" style="height:90%">
     <div class="login-component p-5">
         <form [formGroup]="loginForm" (submit)="submitForm()">
             <div class="d-flex align-items-center flex-column">
@@ -6,7 +9,7 @@
             <mat-form-field appearance="outline" class="form-field w-100">
                 <mat-label>Email</mat-label>
                 <input matInput type="text" id="email" formControlName="email">
-                @if (f.email.hasError('email') && !f.email.hasError('required')) {
+                  @if (f.email.hasError('email') && !f.email.hasError('required')) {
                     <mat-error>Please enter a valid email address</mat-error>
                   }
                   @if (f.email.hasError('required')) {
@@ -17,7 +20,7 @@
             <mat-form-field appearance="outline" class="form-field w-100">
                 <mat-label>Password</mat-label>
                 <input matInput type="password" id="password" formControlName="password">
-                @if (f.password.hasError('pattern') && !f.password.hasError('required')) {
+                  @if (f.password.hasError('pattern') && !f.password.hasError('required')) {
                     <mat-error>Password must contain atleast 1 alphabet, 1 digit, 1 special char with min length 8</mat-error>
                   }
                   @if (f.password.hasError('required')) {
@@ -25,12 +28,15 @@
                   }
             </mat-form-field>
 
-            <button mat-flat-button type="submit" class="login-btn bg-black text-white w-100">Login</button>
+            <button mat-flat-button type="submit" class="login-btn button-primary w-100">Login</button>
 
             <mat-error *ngIf="!emailAndPasswordMatch" class="mt-2">User with email and password doesn't exist</mat-error>
             </div>
         </form>
     </div>
+  </div>
+</div>
+<div class="background-div d-none d-md-block col-md-6"></div>
 </div>
 
 
