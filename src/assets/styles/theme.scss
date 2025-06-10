@@ -20,7 +20,7 @@ $font-size-base: 16px;
 $spacing-unit: 8px;
 
 // Border Radius
-$border-radius: 8px;
+$border-radius: 4px;
 
 // Shadow
 $box-shadow-default: 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -50,13 +50,13 @@ body
   color: white !important;
   border: none;
   padding: $spacing-unit $spacing-unit * 2;
-  border-radius: $border-radius;
+  border-radius: $border-radius !important;
   box-shadow: $box-shadow-default !important;
   cursor: pointer;
   transition: 0.3s;
 
   &:hover {
-    background-color: darken($color-primary, 5%);
+    background-color: darken($color-primary, 5%) !important;
   }
 }
 
@@ -66,4 +66,14 @@ body
   border-radius: $border-radius;
   box-shadow: $box-shadow-default;
   padding: $spacing-unit * 2;
+}
+
+.btn
+{
+  border-radius:$border-radius !important;
+}
+
+.text-secondary
+{
+  
 }
