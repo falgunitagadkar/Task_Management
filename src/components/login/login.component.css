@@ -21,3 +21,9 @@
     margin-top:10px;
     height:35px;
 }
+
+.google-signin-btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }

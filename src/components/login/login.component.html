@@ -28,8 +28,9 @@
                   }
             </mat-form-field>
 
-            <button mat-flat-button type="submit" class="login-btn button-primary w-100">Login</button>
+            <button mat-flat-button type="submit" class="login-btn button-primary w-100 mb-3">Login</button>
 
+            <div id="google-button" class="google-signin-btn"></div>
             <mat-error *ngIf="!emailAndPasswordMatch" class="mt-2">User with email and password doesn't exist</mat-error>
             </div>
         </form>
