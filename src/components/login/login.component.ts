@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ILogin } from '../../models/login';
+import { ILoginRequest } from './models/login';
 import { NgIf } from '@angular/common';
 import {  SocialAuthService ,GoogleSigninButtonModule, GoogleLoginProvider} from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
@@ -143,18 +143,24 @@ export class LoginComponent implements AfterViewInit {
 
   submitForm() {
     if (this.loginForm.valid) {
-      const data: ILogin = {
+      const data: ILoginRequest = {
         email: this.f?.['email'].value ?? '',
         password: this.loginForm.controls.password.value ?? '',
       };
 
-      if (this.authService.login(data)) {
-        this.emailAndPasswordMatch = true;
-        this.router.navigate(['/list']);
-      } else {
-        this.emailAndPasswordMatch = false;
-      }
-    }
-  }
-
+      this.authService.login(data).subscribe({
+        next : (userExists) => {
+          if(userExists)
+          {
+              this.emailAndPasswordMatch = true;
+              console.log("Login successful");
+          }
+          else
+          {
+            this.emailAndPasswordMatch = false;
+            console.log("Login Failed");
+          }
+        }
+      })
+    }}
 }

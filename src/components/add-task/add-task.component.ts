@@ -1,4 +1,4 @@
-import { Component,ChangeDetectionStrategy } from '@angular/core';
+import { Component,ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { MatFormField, MatError, MatLabel, MatHint, MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
@@ -23,7 +23,7 @@ import { concatMap, tap } from 'rxjs';
   styleUrl: './add-task.component.css',
   changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class AddTaskComponent {
+export class AddTaskComponent implements OnInit{
 
     isEdit = false; 
     addTaskForm! : FormGroup;
