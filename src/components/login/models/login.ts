@@ -12,3 +12,7 @@ export interface IUser
     password : string;
 }
 
+export interface IGoogleLogin
+{
+    idToken : string;
+}

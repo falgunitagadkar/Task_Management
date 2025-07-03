@@ -48,7 +48,7 @@
                     <mat-chip *ngFor="let label of task.labels">{{ label }}</mat-chip>
                 </mat-chip-set>
               </td>
-              <td>{{ task.dueDate }}</td>
+              <td>{{task.dueDate | date:'medium'  }}</td>
               <td>{{ task.isActive }}</td>
               <td>
                 <div class="d-flex">

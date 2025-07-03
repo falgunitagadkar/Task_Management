@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ITask } from '../../models/tasks';
 import {
   MatDialog,
@@ -13,6 +13,7 @@ import { MatChipsModule, MatChip, MatChipSet } from '@angular/material/chips';
 import { NgxPaginationModule, } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -27,12 +28,13 @@ import { MatIconModule } from '@angular/material/icon';
     NgxPaginationModule,
     FormsModule,
     MatIconModule,
+    DatePipe
   ],
   providers: [MatDialog],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
-export class ListComponent{
+export class ListComponent implements OnInit{
   userId = localStorage.getItem('currentUserId');
   noTasks = false;
   taskList: ITask[] = [];
@@ -47,23 +49,26 @@ export class ListComponent{
   searchText  = "";
 
   constructor(private taskService: TaskService, private dialog: MatDialog) {
-    this.getTasks();
+  }
+
+  ngOnInit()
+  {
+    setTimeout(() => {
+      this.getTasks();
+    }, 100); 
   }
 
   getTasks() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    this.userId
-      ? this.taskService
-          .getTaskListByUserId(parseInt(this.userId))
+      this.taskService
+          .getTaskListByUserId()
           .subscribe((response) => {
-            this.taskList = this.sortTasks(response,this.sortBy,this.sortOrder);
+            this.taskList = this.sortTasks(response.data.records,this.sortBy,this.sortOrder);
             this.taskListFiltered = this.taskList;
             this.calculateFirstAndLastItems();
           })
-      : (this.noTasks = true);
   }
 
-  deleteClicked(id: string) {
+  deleteClicked(id: number) {
     this.dialogRef = this.dialog.open(DeleteDialogComponent, {
       height: '200px',
       width: '250px',
@@ -76,12 +81,12 @@ export class ListComponent{
     });
   }
 
-  deleteTask(id: string) {
+  deleteTask(id: number) {
     this.taskService.deleteTaskById(id.toString()).subscribe({
       next: () => {
         this.getTasks();
       },
-      error: (err) => console.log('Error occured:' + err),
+      error: (err) => console.error('Error occured:' + err),
     });
   }
 

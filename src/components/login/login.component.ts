@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,10 +6,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ILoginRequest } from './models/login';
+import { IGoogleLogin, ILoginRequest } from './models/login';
 import { NgIf } from '@angular/common';
-import {  SocialAuthService ,GoogleSigninButtonModule, GoogleLoginProvider} from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 interface CredentialResponse {
@@ -48,18 +48,15 @@ declare const google: {
     ReactiveFormsModule,
     MatButtonModule,
     RouterModule,
-    NgIf,
-    GoogleSigninButtonModule
+    NgIf
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements AfterViewInit {
   loginform! : FormGroup;
-  emailAndPasswordMatch = true;
-  GoogleLoginProvider = GoogleLoginProvider;
 
-  constructor(private router: Router, private authService: AuthService, private authGoogle: SocialAuthService, private http : HttpClient) {}
+  constructor(private router: Router, private authService: AuthService, private http : HttpClient,private destoryRef : DestroyRef) {}
 
   
 
@@ -87,46 +84,22 @@ export class LoginComponent implements AfterViewInit {
       }
     }, 100); // Check every 100ms
   }
-  // ngOnInit(): void {
-  //   requestIdleCallback(() => {
-  //     if (google && document.getElementById('google-button')) {
-  //       google.accounts.id.initialize({
-  //         client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-  //         callback: this.handleCredentialResponse.bind(this),
-  //       });
-  
-  //       google.accounts.id.renderButton(
-  //         document.getElementById('google-button') as HTMLElement,
-  //         { theme: 'outline', size: 'large' }
-  //       );
-  
-  //     } else {
-  //       console.error("Google API or #google-button div not ready");
-  //     }
-  //   });
 
-
-
-
-    // google.accounts.id.initialize({
-    //   client_id: '489575766377-as3pkncpu62lj5htt2jsrs89t8n2g1rm.apps.googleusercontent.com',
-    //   callback: this.handleCredentialResponse.bind(this),
-    // });
-
-    // google.accounts.id.renderButton(
-    //   document.getElementById('google-button') as HTMLElement,
-    //   {
-    //     theme: 'outline',
-    //     size: 'large',
-    //     text: 'signin_with',
-    //     shape: 'rectangular',
-    //     logo_alignment: 'left'
-    //   }
-    // );
-  // }
 
   handleCredentialResponse(response: CredentialResponse) {
-    console.log("JWT ID Token:", response.credential);
+    const googleObj : IGoogleLogin = {
+        idToken : response.credential
+    }
+    this.authService.googleLogin(googleObj).pipe(takeUntilDestroyed(this.destoryRef)).subscribe({
+      next: (userExists) => {
+        if (userExists) {
+          this.router.navigate(['/list']);
+        }
+      },
+      error: (error) => {
+        console.error('Google login failed:', error);
+      }
+    })
   }
 
   loginForm = new FormGroup({
@@ -148,19 +121,13 @@ export class LoginComponent implements AfterViewInit {
         password: this.loginForm.controls.password.value ?? '',
       };
 
-      this.authService.login(data).subscribe({
+      this.authService.login(data).pipe(takeUntilDestroyed(this.destoryRef)).subscribe({
         next : (userExists) => {
           if(userExists)
           {
-              this.emailAndPasswordMatch = true;
-              console.log("Login successful");
-          }
-          else
-          {
-            this.emailAndPasswordMatch = false;
-            console.log("Login Failed");
+              this.router.navigate(['/list']);
           }
         }
-      })
+      })     
     }}
 }

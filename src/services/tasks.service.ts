@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IEditTask, ITask } from '../models/tasks';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+import { BaseResponseModel, DataQueryResponseModel } from '../app/common/models';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +12,8 @@ export class TaskService {
   private apiUrl = 'http://localhost:3000/tasks';
   constructor(private http: HttpClient) {}
 
-  getTaskListByUserId(userId: number): Observable<ITask[]> {
-    return this.http.get<ITask[]>(`${this.apiUrl}` + '?userId=' + userId);
+  getTaskListByUserId(): Observable<BaseResponseModel<DataQueryResponseModel<ITask>>> {
+    return this.http.get<BaseResponseModel<DataQueryResponseModel<ITask>>>(`${environment.apiUrl}/tasks/get-all-tasks`);
   }
 
   getTaskById(id: number) {

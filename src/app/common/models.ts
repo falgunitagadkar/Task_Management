@@ -5,3 +5,9 @@ export interface BaseResponseModel<T> {
     message: string;
     errorMessages: string[];
 }
+
+export interface DataQueryResponseModel<T>
+{
+    records : T[];
+    totalRecords : number;
+}

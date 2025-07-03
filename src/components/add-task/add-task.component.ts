@@ -78,7 +78,7 @@ export class AddTaskComponent implements OnInit{
     {
       this.taskService.getTaskById(Number(id)).subscribe(response =>
         {
-          this.currentTaskId = response.id;
+          // this.currentTaskId = response.id;
           this.addTaskForm.setValue({
             title:response.title,
             status:response.status,
@@ -99,21 +99,21 @@ export class AddTaskComponent implements OnInit{
         if(!this.isEdit)
         {
             const task : ITask = {
-              id : "0",
+              id : 0,
               userId : this.currentUserId,
               title : this.f['title'].value,
               status : this.f['status'].value,
               type : this.f['type'].value,
               priority : this.f['priority'].value,
               labels :this.f['labels'].value,
-              dueDate : new Date(this.f['dueDate'].value).toLocaleDateString('en-CA'),
+              dueDate : new Date(this.f['dueDate'].value),
               isActive : this.f['isActive'].value
             }
           
-            this.taskService.getTaskListByUserId(this.currentUserId).pipe(
+            this.taskService.getTaskListByUserId().pipe(
               tap(response => {
-                this.maxTaskId = response.reduce((max, val) => Math.max(max, Number(val.id)), this.maxTaskId);
-                task.id = (this.maxTaskId + 1).toString();
+                this.maxTaskId = response.data.records.reduce((max, val) => Math.max(max, Number(val.id)), this.maxTaskId);
+                task.id = (this.maxTaskId + 1);
               }),
               concatMap(() => this.taskService.addTask(task))
               ).subscribe({
