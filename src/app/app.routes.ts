@@ -16,10 +16,11 @@ export const routes: Routes = [
     {   
         path:'', 
         component:LayoutComponent,
+        canActivate: [AuthGuardService],
         children: [
-            { path: 'list', component: ListComponent, canActivate:[AuthGuardService] }, // Default Route
-            { path: 'add-task', component: AddTaskComponent, canActivate:[AuthGuardService] },
-            { path: 'edit-task/:id', component: AddTaskComponent, canActivate:[AuthGuardService]}
+            { path: 'list', component: ListComponent }, // Default Route
+            { path: 'add-task', component: AddTaskComponent },
+            { path: 'edit-task/:id', component: AddTaskComponent}
           ],
     },
     {

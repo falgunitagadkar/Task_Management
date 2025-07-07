@@ -1,15 +1,15 @@
 export interface ITask
 {
-    id : string;
+    id : number;
     userId : number;
     title : string;
-    status : "To Do" | "In Progess" | "Completed";
-    priority : "High" | "Medium" | "Low";
-    type : "Bug" | "Feature" | "Enhancement";
+    status : string;
+    priority : string;
+    type : string;
     labels : string[] | null;
     isActive : boolean;
     description? : null;
-    dueDate : string;
+    dueDate : Date;
 }
 
 export interface IEditTask

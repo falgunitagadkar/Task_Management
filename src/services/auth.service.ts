@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ILogin, IUser } from '../models/login';
+import { IGoogleLogin, ILoginRequest } from '../components/login/models/login';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from '../environments/environment';
+import { BaseResponseModel } from '../app/common/models';
+import { TokenService } from '../app/common/services/token.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,43 +12,76 @@ import { environment } from '../environments/environment';
 export class AuthService {
   private userLoggedIn: boolean = this.checkUserLoggedIn();
   private userLoggedInSubject = new BehaviorSubject<boolean>(this.userLoggedIn);
-  // private apiUrl = 'http://localhost:3000';
-  users!: IUser[];
-
-  constructor(private http: HttpClient) {
-    this.getUsers().subscribe((res) => {
-      this.users = res;
-    });
+  
+  constructor(private http: HttpClient, private tokenService : TokenService) {
   }
 
   get userLoggedIn$() {
     return this.userLoggedInSubject.asObservable();
   }
 
-  getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${environment.apiUrl}/users`);
+  login(userCred: ILoginRequest): Observable<boolean> {
+    return this.http
+      .post<BaseResponseModel<string>>(`${environment.apiUrl}/auth/login`, userCred)
+      .pipe(
+        tap(res => {
+          this.tokenService.setToken(res.data);
+          this.userLoggedInSubject.next(true);
+        }),
+        map(() => true),
+        catchError(() => {
+          this.userLoggedInSubject.next(false);
+          return of(false);
+        })
+      );
   }
 
-  login(userCred: ILogin): boolean {
-    const user = this.users.find(
-      (x) => x.email == userCred.email && x.password == userCred.password
+  refreshToken(): Observable<boolean> {
+    return this.http.get<BaseResponseModel<string>>(
+        `${environment.apiUrl}/auth/refresh`,{ withCredentials : true })
+      .pipe(
+        // 1) tap for side‑effects: store new JWT and mark user logged in
+        tap(res => {
+          this.tokenService.setToken(res.data);
+          this.userLoggedInSubject.next(true);
+        }),
+        map(() => true),
+        catchError(() => {
+          this.userLoggedInSubject.next(false);
+          return of(false);
+        })
+      );
+  }
+
+  googleLogin(token : IGoogleLogin): Observable<boolean> {
+    return this.http.post<BaseResponseModel<string>>(
+      `${environment.apiUrl}/auth/google-login`, token)
+    .pipe(
+      tap(res => {
+        this.tokenService.setToken(res.data);
+        this.userLoggedInSubject.next(true);
+      }),
+      map(() => true),
+      catchError(() => {
+        this.userLoggedInSubject.next(false);
+        return of(false);
+      })
     );
-
-    if (user != null) localStorage.setItem('currentUserId', user.id.toString());
-
-    this.userLoggedIn = this.checkUserLoggedIn();
-    this.userLoggedInSubject.next(this.userLoggedIn);
-    return !!user;
   }
 
-  checkUserLoggedIn() {
-    const user = localStorage.getItem('currentUserId');
-    return !!user;
-  }
 
   logout() {
-    localStorage.removeItem('currentUserId');
-    this.userLoggedIn = this.checkUserLoggedIn(); // Update the variable
+    this.tokenService.clearToken();
+    this.userLoggedIn = false; // Update the variable
     this.userLoggedInSubject.next(this.userLoggedIn);
+  }
+
+  checkUserLoggedIn(): boolean {
+    const token = this.tokenService.getToken();
+    if (token) {
+      // Optionally, you can add logic to check if the token is valid (e.g., not expired)
+      return true;
+    }
+    return false;
   }
 }

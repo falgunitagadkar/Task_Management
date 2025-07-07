@@ -1,43 +1,74 @@
-<div class="d-flex row h-100">
-<div class="col-sm-12 col-md-6 h-100">
-  <h4 class="mt-1 ms-2 mt-2 text-primary">Task Stack</h4>
-  <div class="d-flex justify-content-center align-items-center" style="height:90%">
-    <div class="login-component p-5">
-        <form [formGroup]="loginForm" (submit)="submitForm()">
-            <div class="d-flex align-items-center flex-column">
-            <h3 class="mb-4">Login</h3>
-            <mat-form-field appearance="outline" class="form-field w-100">
-                <mat-label>Email</mat-label>
-                <input matInput type="text" id="email" formControlName="email">
-                  @if (f.email.hasError('email') && !f.email.hasError('required')) {
-                    <mat-error>Please enter a valid email address</mat-error>
-                  }
-                  @if (f.email.hasError('required')) {
-                    <mat-error>Email is required</mat-error>
-                  }
-            </mat-form-field>
+<div class="flex h-screen">
 
-            <mat-form-field appearance="outline" class="form-field w-100">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" id="password" formControlName="password">
-                  @if (f.password.hasError('pattern') && !f.password.hasError('required')) {
-                    <mat-error>Password must contain atleast 1 alphabet, 1 digit, 1 special char with min length 8</mat-error>
-                  }
-                  @if (f.password.hasError('required')) {
-                    <mat-error>Password is required</mat-error>
-                  }
-            </mat-form-field>
-
-            <button mat-flat-button type="submit" class="login-btn button-primary w-100 mb-3">Login</button>
-
-            <div id="google-button" class="google-signin-btn"></div>
-            <mat-error *ngIf="!emailAndPasswordMatch" class="mt-2">User with email and password doesn't exist</mat-error>
-            </div>
-        </form>
-    </div>
+<div class="w-full md:w-1/2 h-full flex flex-col justify-center items-center space-y-8 p-10 shadow-lg">
+  <!-- Logo -->
+  <div class="flex justify-center">
+    <h2 class="mt-2 ms-2 text-primary font-semibold">Task Stack</h2>
   </div>
+
+  <!-- Heading -->
+  <div class="text-center">
+    <h3 class="text-2xl font-bold text-gray-900">Sign in to your account</h3>
+    <p class="mt-2 text-sm text-gray-600">
+      Not a member?
+      <a href="#" class="text-indigo-600 hover:underline font-medium">Register now!!!</a>
+    </p>
+  </div>
+
+  <!-- Form -->
+  <form class="space-y-2 w-full max-w-sm" [formGroup]="loginForm" (submit)="submitForm()">
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+      <mat-form-field appearance="outline" class="w-full">
+        <input matInput type="text" id="email" formControlName="email" >
+          @if (f.email.hasError('email') && !f.email.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+          }
+          @if (f.email.hasError('required')) {
+            <mat-error>Email is required</mat-error>
+          }
+      </mat-form-field>
+    </div>
+
+    <div>
+      <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+      <mat-form-field appearance="outline" class="w-full mb-3">
+        <input matInput type="password" id="password" formControlName="password">
+          @if (f.password.hasError('pattern') && !f.password.hasError('required')) {
+            <mat-error>Password must contain atleast 1 alphabet, 1 digit, 1 special char with min length 8</mat-error>
+          }
+          @if (f.password.hasError('required')) {
+            <mat-error>Password is required</mat-error>
+          }
+    </mat-form-field>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <label class="flex items-center">
+        <input type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded"/>
+        <span class="ml-2 text-sm text-gray-700">Remember me</span>
+      </label>
+      <a href="#" class="text-sm text-indigo-600 hover:underline font-medium">Forgot password?</a>
+    </div>
+
+    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md font-semibold">
+      Sign in
+    </button>
+  </form>
+
+  <!-- Divider -->
+  <div class="relative flex items-center justify-center w-full max-w-sm">
+    <div class="absolute inset-0 flex items-center">
+      <div class="w-full border-t border-gray-300"></div>
+    </div>
+    <div class="relative bg-white px-4 text-sm text-gray-500">Or continue</div>
+  </div>
+
+  <!-- Social Buttons -->
+  <div id="google-button" class="google-signin-btn w-full max-w-sm"></div>
 </div>
-<div class="background-div d-none d-md-block col-md-6"></div>
+<div class="background-div w-1/2 hidden md:flex"></div>
 </div>
+
 
 
