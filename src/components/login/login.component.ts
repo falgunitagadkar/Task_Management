@@ -7,9 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { IGoogleLogin, ILoginRequest } from './models/login';
-import { NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { HotToastService } from '@ngneat/hot-toast';
 
 
 interface CredentialResponse {
@@ -47,16 +47,16 @@ declare const google: {
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
-    RouterModule,
-    NgIf
+    RouterModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  providers: [HotToastService]
 })
 export class LoginComponent implements AfterViewInit {
   loginform! : FormGroup;
 
-  constructor(private router: Router, private authService: AuthService, private http : HttpClient,private destoryRef : DestroyRef) {}
+  constructor(private router: Router, private authService: AuthService, private http : HttpClient,private destoryRef : DestroyRef,private toast:HotToastService) {}
 
   
 
@@ -82,9 +82,31 @@ export class LoginComponent implements AfterViewInit {
         );
 
       }
-    }, 100); // Check every 100ms
+    }, 100);
   }
 
+  // showToast() {
+  //   this.toast.show('Hello World!');
+  //   this.toast.loading('Lazyyy...');
+  //   this.toast.success('Yeah!!');
+  //   this.toast.warning('Boo!');
+  //   this.toast.error('Oh no!');
+  //   this.toast.info('Something...');
+  // }
+
+  // customToast() {
+  //   this.toast.success('Look at my styles,', {
+  //     duration: 4000,
+  //     style: {
+  //       padding: '8px',
+  //       color: 'green',
+  //     },
+  //     iconTheme: {
+  //       primary: 'green',
+  //       secondary: '#FFFAEE',
+  //     },
+  //   });
+  // }
 
   handleCredentialResponse(response: CredentialResponse) {
     const googleObj : IGoogleLogin = {
@@ -95,9 +117,6 @@ export class LoginComponent implements AfterViewInit {
         if (userExists) {
           this.router.navigate(['/list']);
         }
-      },
-      error: (error) => {
-        console.error('Google login failed:', error);
       }
     })
   }
@@ -108,6 +127,7 @@ export class LoginComponent implements AfterViewInit {
       Validators.required,
       Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'),
     ]),
+    rememberMe: new FormControl(false),
   });
 
   get f() {
@@ -119,13 +139,16 @@ export class LoginComponent implements AfterViewInit {
       const data: ILoginRequest = {
         email: this.f?.['email'].value ?? '',
         password: this.loginForm.controls.password.value ?? '',
+        rememberMe: this.loginForm.controls.rememberMe.value ?? false
       };
 
       this.authService.login(data).pipe(takeUntilDestroyed(this.destoryRef)).subscribe({
         next : (userExists) => {
           if(userExists)
           {
+            setTimeout(() => {
               this.router.navigate(['/list']);
+            }, 1000);
           }
         }
       })     

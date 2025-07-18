@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use '@ngneat/hot-toast/src/styles/styles.scss';
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '../src/assets/styles/theme.scss';
 @import '../src/assets/styles/button.scss';

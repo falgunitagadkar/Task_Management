@@ -30,3 +30,13 @@ input:focus
     border-color:rgb(187,187,187) !important;
     outline:none !important;
 }
+
+.btn {
+  @apply px-4 py-2 rounded font-semibold transition;
+}
+.btn-primary {
+  @apply bg-indigo-600 text-white hover:bg-indigo-700;
+}
+.btn-secondary {
+  @apply bg-gray-600 text-white hover:bg-gray-700;
+}

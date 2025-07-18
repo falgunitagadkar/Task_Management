@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
 import { LayoutComponent } from '../components/layout/layout.component';
-import { AuthGuardService } from '../services/authguard.service';
+import { AuthGuardService } from './core/guards/authguard.service';
 import { AddTaskComponent } from '../components/add-task/add-task.component';
 import { ListComponent } from '../components/list/list.component';
 import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
@@ -11,7 +11,8 @@ export const routes: Routes = [
     {   
         path:'' , 
         component:LandingPageComponent, 
-        pathMatch:'full'
+        pathMatch:'full',
+        canActivate: [AuthGuardService] 
     },
     {   
         path:'', 
@@ -27,16 +28,6 @@ export const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         canActivate: [AuthGuardService],
-    },
-    {
-        path:'add-task',
-        component:AddTaskComponent,
-        canActivate : [AuthGuardService]
-    },
-    {
-        path:'edit-task/:id',
-        component:AddTaskComponent,
-        canActivate:[AuthGuardService]
     },
     {    path: '**', 
         component:PageNotFoundComponent

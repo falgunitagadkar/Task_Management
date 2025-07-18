@@ -1,65 +1,68 @@
 <div *ngIf="!noTasks" class="p-5">
-    <div class="d-flex justify-content-end mb-4">
+    <div class="flex justify-end mb-4">
  
-            <input matInput placeholder="Search..." type="text" id="title" class="me-2" [(ngModel)]="searchText" (input)="filterItems()">
+            <input matInput placeholder="Search..." type="text" id="title" class="me-2 shadow p-2" [(ngModel)]="searchText" (input)="filterItems()">
         
-        <button class="btn btn-sm button-outline-primary" routerLink="/add-task">+ Add Task</button>
+        <button class="btn btn-primary " routerLink="/add-task">+ Add Task</button>
     </div>
-    <table class="table table-hover">
-        <thead class="">
+    <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
+        <thead class="bg-gray-100">
             <tr>
-              <th (click)="sortTasks(taskListFiltered,'title',!sortOrder)">Title
+              <th (click)="sortTasks(taskListFiltered,'title',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Title
                     <mat-icon *ngIf="sortBy === 'title' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'title' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th (click)="sortTasks(taskListFiltered,'status',!sortOrder)">Status
+              <th (click)="sortTasks(taskListFiltered,'status',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Status
                     <mat-icon *ngIf="sortBy === 'status' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'status' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th (click)="sortTasks(taskListFiltered,'priority',!sortOrder)">Priority
+              <th (click)="sortTasks(taskListFiltered,'priority',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Priority
                     <mat-icon *ngIf="sortBy === 'priority' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'priority' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th (click)="sortTasks(taskListFiltered,'type',!sortOrder)">Type
+              <th (click)="sortTasks(taskListFiltered,'type',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Type
                     <mat-icon *ngIf="sortBy === 'type' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'type' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th>Labels
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Labels
               </th>
-              <th (click)="sortTasks(taskListFiltered,'dueDate',!sortOrder)">Due Date
+              <th (click)="sortTasks(taskListFiltered,'dueDate',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Due Date
                     <mat-icon *ngIf="sortBy === 'dueDate' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'dueDate' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th (click)="sortTasks(taskListFiltered,'isActive',!sortOrder)">Is Active
+              <th (click)="sortTasks(taskListFiltered,'isActive',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Is Active
                     <mat-icon *ngIf="sortBy === 'isActive' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'isActive' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th>Actions</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="bg-white">
             <tr *ngFor="let task of taskListFiltered | paginate : { itemsPerPage: itemsEachPage, currentPage: page }">
-              <td>{{ task.title }}</td>
-              <td>{{ task.status }}</td>
-              <td>{{ task.priority }}</td>
-              <td>{{ task.type }}</td>
-              <td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.title }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.status }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.priority }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.type }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                 <mat-chip-set>
-                    <mat-chip *ngFor="let label of task.labels">{{ label }}</mat-chip>
+                    <mat-chip>hello</mat-chip>
                 </mat-chip-set>
               </td>
-              <td>{{task.dueDate | date:'medium'  }}</td>
-              <td>{{ task.isActive }}</td>
-              <td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{task.dueDate | date:'medium'  }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.isActive }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                 <div class="d-flex">
-                <button class="btn btn-sm button-outline-primary me-2" [routerLink]="['/edit-task',task.id]">Edit</button>
-                <button class="btn btn-sm btn-outline-danger" (click)="deleteClicked(task.id)">Delete</button>
+                <button class="btn btn-primary me-2" [routerLink]="['/edit-task',task.id]">Edit</button>
+                <button class="btn btn-secondary btn-outline-danger" (click)="deleteClicked(task.id)">Delete</button>
                 </div>
               </td>
             </tr>
           </tbody>
     </table>
-    <div class="d-flex justify-content-center">
+  </div>
+
+    <div class="flex justify-center mt-2">
     <div class="mt-1">Showing {{firstItem}} - {{lastItem}} of {{taskListFiltered.length}} records</div>
     <pagination-controls previousLabel="Prev" nextLabel="Next"(pageChange)="pageNumberChange($event)"></pagination-controls>
     <select value="5" class="page-size" [(ngModel)]="itemsEachPage" (change)="calculateFirstAndLastItems()">
