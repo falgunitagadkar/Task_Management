@@ -2,6 +2,7 @@ export interface ILoginRequest
 {
     email : string;
     password : string;
+    rememberMe : boolean;
 }
 
 export interface IUser

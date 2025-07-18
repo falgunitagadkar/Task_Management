@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { IEditTask, ITask } from '../models/tasks';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
-import { BaseResponseModel, DataQueryResponseModel } from '../app/common/models';
+import { BaseResponseModel, DataQueryResponseModel } from '../app/core/models';
 
 @Injectable({
   providedIn: 'root',
