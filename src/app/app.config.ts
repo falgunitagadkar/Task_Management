@@ -7,7 +7,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { GlobalErrorHandler } from './core/global-error.handler';
 import { CredentialsInterceptor } from './core/interceptors/credentials.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../app/core/services/auth.service';
 
 function initAuthFactory(authService: AuthService) {
   return () => authService.initAuth();

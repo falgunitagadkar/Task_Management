@@ -84,9 +84,9 @@ export class AddTaskComponent implements OnInit{
             status:response.status,
             priority:response.priority,
             dueDate:new Date(response.dueDate),
-            type:response.type,
+            category:response.category,
             labels:response.labels,
-            isActive:response.isActive
+            isCompleted:response.isCompleted
           })
         }
       );
@@ -103,11 +103,11 @@ export class AddTaskComponent implements OnInit{
               userId : this.currentUserId,
               title : this.f['title'].value,
               status : this.f['status'].value,
-              type : this.f['type'].value,
+              category : this.f['category'].value,
               priority : this.f['priority'].value,
               labels :this.f['labels'].value,
               dueDate : new Date(this.f['dueDate'].value),
-              isActive : this.f['isActive'].value
+              isCompleted : this.f['isCompleted'].value
             }
           
             this.taskService.getTaskListByUserId().pipe(
@@ -129,11 +129,11 @@ export class AddTaskComponent implements OnInit{
               userId : this.currentUserId,
               title : this.f['title'].value,
               status : this.f['status'].value,
-              type : this.f['type'].value,
+              category : this.f['category'].value,
               priority : this.f['priority'].value,
               labels :this.f['labels'].value,
               dueDate : new Date(this.f['dueDate'].value).toLocaleDateString('en-CA'),
-              isActive : this.f['isActive'].value
+              isCompleted : this.f['isCompleted'].value
             }
 
             this.taskService.editTask(this.currentTaskId,task).subscribe({
@@ -148,12 +148,12 @@ export class AddTaskComponent implements OnInit{
     {
       this.addTaskForm = new FormGroup({
         title : new FormControl('',[Validators.required,Validators.maxLength(500)]),
-        status : new FormControl('',[Validators.required]),
+        status : new FormControl({value : 'Pending', disabled : !this.isEdit},[Validators.required]),
         priority : new FormControl('',[Validators.required]),
         dueDate : new FormControl<Date>(new Date(),[Validators.required]),
         labels : new FormControl<string[]>([]),
-        type : new FormControl('Feature',[Validators.required]),
-        isActive : new FormControl(true)
+        category : new FormControl('Personal',[Validators.required]),
+        isCompleted : new FormControl(false)
       });
    }
 }

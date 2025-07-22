@@ -1,9 +1,13 @@
 <div *ngIf="!noTasks" class="p-5">
     <div class="flex justify-end mb-4">
- 
-            <input matInput placeholder="Search..." type="text" id="title" class="me-2 shadow p-2" [(ngModel)]="searchText" (input)="filterItems()">
-        
-        <button class="btn btn-primary " routerLink="/add-task">+ Add Task</button>
+
+          <!-- Search -->
+          <input type="text" placeholder="Search..." id="title" [(ngModel)]="searchText" (input)="filterItems()" class="border px-2 py-1 me-2 rounded-md text-sm focus:ring-indigo-500 focus:outline-none" />
+      
+          <!-- Add Task -->
+          <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-md text-sm font-medium" routerLink="/list/add-task">
+            + Add Task
+          </button>
     </div>
     <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
@@ -21,19 +25,17 @@
                     <mat-icon *ngIf="sortBy === 'priority' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'priority' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th (click)="sortTasks(taskListFiltered,'type',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Type
-                    <mat-icon *ngIf="sortBy === 'type' && sortOrder">arrow_downward</mat-icon>
-                    <mat-icon *ngIf="sortBy === 'type' && !sortOrder">arrow_upward</mat-icon>
+              <th (click)="sortTasks(taskListFiltered,'category',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Category
+                <mat-icon *ngIf="sortBy === 'category' && sortOrder">arrow_downward</mat-icon>
+                <mat-icon *ngIf="sortBy === 'category' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Labels
-              </th>
+              <!-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Labels
+              </th> -->
               <th (click)="sortTasks(taskListFiltered,'dueDate',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Due Date
                     <mat-icon *ngIf="sortBy === 'dueDate' && sortOrder">arrow_downward</mat-icon>
                     <mat-icon *ngIf="sortBy === 'dueDate' && !sortOrder">arrow_upward</mat-icon>
               </th>
-              <th (click)="sortTasks(taskListFiltered,'isActive',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Is Active
-                    <mat-icon *ngIf="sortBy === 'isActive' && sortOrder">arrow_downward</mat-icon>
-                    <mat-icon *ngIf="sortBy === 'isActive' && !sortOrder">arrow_upward</mat-icon>
+             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Is Completed
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Actions</th>
             </tr>
@@ -43,18 +45,25 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.title }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.status }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.priority }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.type }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.category }}</td>
+              <!-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                 <mat-chip-set>
                     <mat-chip>hello</mat-chip>
                 </mat-chip-set>
-              </td>
+              </td> -->
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{task.dueDate | date:'medium'  }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.isActive }}</td>
+              <td class="px-6 py-4">
+                <input
+                type="checkbox"
+                [checked]="task.status === 'Completed'"
+                [disabled] = "task.status === 'Completed'"
+                class="w-4 h-4 accent-green-600 rounded focus:ring-2 focus:ring-green-500 border-green-300"
+              />
+              </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                <div class="d-flex">
-                <button class="btn btn-primary me-2" [routerLink]="['/edit-task',task.id]">Edit</button>
-                <button class="btn btn-secondary btn-outline-danger" (click)="deleteClicked(task.id)">Delete</button>
+                <div class="d-flex space-x-2">
+                <button class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md" [routerLink]="['/edit-task',task.id]" *ngIf="task.status !== 'Completed'">Edit</button>
+                <button class="bg-gray-500 text-white px-4 py-1.5 text-sm font-medium rounded-md" (click)="deleteClicked(task.id)">Delete</button>
                 </div>
               </td>
             </tr>

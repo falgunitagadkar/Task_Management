@@ -5,8 +5,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { IGoogleLogin, ILoginRequest } from './models/login';
+import { AuthService } from '../../services/auth.service'; 
+import { IGoogleLogin, ILoginRequest } from '../../models/login'
 import { HttpClient } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HotToastService } from '@ngneat/hot-toast';
