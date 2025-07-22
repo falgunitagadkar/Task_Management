@@ -1,35 +1,41 @@
-<div class="parent container">
-    <h4 class="mb-5">{{this.isEdit ? 'Edit Task' : 'Add Task'}}</h4>
-    <form [formGroup]="addTaskForm" class="form-container p-0" (submit)="submit()">  
-        <div class="mb-2 row"> 
-        <mat-form-field appearance="outline" class="small-form-field col-sm-6 pe-2">
-            <mat-label>Title</mat-label>
-            <input matInput type="text" id="title" formControlName="title">
-            @if (f['title'].hasError('maxLength') && !f['title'].hasError('required')) {
-                <mat-error>Length exceeds 500 characters</mat-error>
-              }
-              @if (f['title'].hasError('required')) {
-                <mat-error>Title is required</mat-error>
-              }
-        </mat-form-field>
-        
-        <mat-form-field appearance="outline" class="small-form-field col-sm-6">
-            <mat-label>Status</mat-label>
-            <mat-select matNativeControl required formControlName="status">
-              <mat-option value="To Do">To Do</mat-option>
-              <mat-option value="In Progress">In Progress</mat-option>
-              <mat-option value="Completed">Completed</mat-option>
-            </mat-select>
-              @if (f['status'].hasError('required')) {
-                <mat-error>Status is required</mat-error>
-              }
-          </mat-form-field>
+<div class="p-6 bg-white rounded-xl shadow-lg max-w-5xl mx-auto mt-10">
+    <h4 class="text-xl font-semibold mb-6 text-indigo-700">{{this.isEdit ? 'Edit Task' : 'Add Task'}}</h4>
+    <form [formGroup]="addTaskForm" class="" (submit)="submit()">  
+       <div class="grid md:grid-cols-2 gap-6">
+          <div>
+              <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+              <mat-form-field appearance="outline" class="w-full">
+                <input matInput type="text" id="title" formControlName="title">
+                @if (f['title'].hasError('maxLength') && !f['title'].hasError('required')) {
+                    <mat-error>Length exceeds 500 characters</mat-error>
+                  }
+                  @if (f['title'].hasError('required')) {
+                    <mat-error>Title is required</mat-error>
+                  }
+              </mat-form-field>
+          </div>
+            
+          <div>
+              <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+              <mat-form-field appearance="outline" class="small-form-field w-full">
+                  <mat-select id="status" matNativeControl required formControlName="status">
+                    <mat-option value="Pending" selected>Pending</mat-option>
+                    <mat-option value="Completed">Completed</mat-option>
+                    <mat-option value="Over Due">Over Due</mat-option>
+                  </mat-select>
+                    @if (f['status'].hasError('required')) {
+                      <mat-error>Status is required</mat-error>
+                    }
+                </mat-form-field>
+          </div>
         </div>
           
-        <div class="row mb-3">
-          <mat-form-field appearance="outline" class="small-form-field col-sm-4">
-            <mat-label>Priority</mat-label>
-            <mat-select matNativeControl required formControlName="priority">
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div>
+            <label for="priority" class="block text-sm font-medium text-gray-700">Priority</label>
+            <mat-form-field appearance="outline" class="small-form-field w-full">
+            <mat-select matNativeControl required id="priority" formControlName="priority">
               <mat-option value="High">High</mat-option>
               <mat-option value="Medium">Medium</mat-option>
               <mat-option value="Low">Low</mat-option>
@@ -38,11 +44,13 @@
                 <mat-error>Priority is required</mat-error>
               }
           </mat-form-field>
+          </div> 
           
           
-           <mat-form-field appearance="outline" class="small-form-field col-sm-4">
-              <mat-label>Due date</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="dueDate">
+           <div>
+            <label for="dueDate" class="block text-sm font-medium text-gray-700">Due Date</label>
+            <mat-form-field appearance="outline" class="small-form-field w-full">
+              <input matInput id="dueDate" [matDatepicker]="picker" formControlName="dueDate">
               <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -50,22 +58,26 @@
                 <mat-error>DueDate is required</mat-error>
               }
             </mat-form-field>
+           </div>
 
-            <div class="col-sm-4">
-            <span>Type: </span>      
-              <mat-radio-group aria-label="Select Type" class="d-flex" formControlName="type">
-                  <mat-radio-button value="Feature">Feature</mat-radio-button>
-                  <mat-radio-button value="Bug">Bug</mat-radio-button>
-                  <mat-radio-button value="Enhancement">Enhancement</mat-radio-button>
-              </mat-radio-group>
-              @if (f['type'].hasError('required')) {
-                <mat-error>Type is required</mat-error>
+            <div>
+            <label for="category" class="block text-sm font-medium text-gray-700">Category </label>      
+            <mat-form-field appearance="outline" class="small-form-field w-full">
+              <mat-select matNativeControl required id="category" formControlName="category">
+                <mat-option value="Personal">Personal</mat-option>
+                <mat-option value="Hobby">Hobby</mat-option>
+                <mat-option value="Office">Office</mat-option>
+              </mat-select>
+              @if (f['category'].hasError('required')) {
+                <mat-error>Category is required</mat-error>
               }
-          </div>
+            </mat-form-field>
+            </div>
         </div> 
         
-        <mat-form-field appearance="outline" class="small-form-field w-100">
-            <mat-label>Labels</mat-label>
+        <!-- <div>
+          <label for="label" class="block text-sm font-medium text-gray-700">Labels</label>
+          <mat-form-field appearance="outline" class="small-form-field w-full">
             <mat-chip-grid #labelChipGrid aria-label="Enter labels">
             @for (keyword of addTaskForm.controls['labels'].value; track keyword) {
               <mat-chip-row (removed)="removeLabel(keyword)">
@@ -78,19 +90,16 @@
             </mat-chip-grid>
             <input
               placeholder="New label..."
+              id="label"
               [matChipInputFor]="labelChipGrid"
               (matChipInputTokenEnd)="addLabel($event)"
             />
-          </mat-form-field> 
-          
-          <div class="form-check form-switch">
-              <label class="form-check-label" for="flexSwitchCheckDisabled">Is Active</label>
-               <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" formControlName="isActive">
-          </div>
+          </mat-form-field>
+        </div>  -->
 
-          <div class="d-flex justify-content-end">
-          <button type="submit" class="btn me-2 text-white" style="background-color:#673ab7">{{this.isEdit ? 'Save' : 'Add'}}</button>
-          <button type="button" class="btn btn-secondary" routerLink="/list">Cancel</button>
+          <div class="flex justify-end space-x-2">
+          <button type="submit" class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md">{{this.isEdit ? 'Save' : 'Add'}}</button>
+          <button type="button" class="bg-gray-500 text-white px-4 py-1.5 text-sm font-medium rounded-md" routerLink="/list">Cancel</button>
           </div>
     </form>
 </div>

@@ -5,9 +5,9 @@ export interface ITask
     title : string;
     status : string;
     priority : string;
-    type : string;
+    category : string;
     labels : string[] | null;
-    isActive : boolean;
+    isCompleted : boolean;
     description? : null;
     dueDate : Date;
 }
@@ -16,11 +16,11 @@ export interface IEditTask
 {
     userId : number;
     title : string;
-    status : "To Do" | "In Progess" | "Completed";
+    status : "Pending" | "Completed" | "Over Due";
     priority : "High" | "Medium" | "Low";
-    type : "Bug" | "Feature" | "Enhancement";
+    category : string;
     labels : string[] | null;
-    isActive : boolean;
+    isCompleted : boolean;
     description? : null;
     dueDate : string;
 }

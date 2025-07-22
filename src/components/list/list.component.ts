@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ITask } from '../../models/tasks';
+import { NgClass } from '@angular/common';
 import {
   MatDialog,
   MatDialogRef,
@@ -28,7 +29,8 @@ import { DatePipe } from '@angular/common';
     NgxPaginationModule,
     FormsModule,
     MatIconModule,
-    DatePipe
+    DatePipe,
+    NgClass
   ],
   providers: [MatDialog],
   templateUrl: './list.component.html',
@@ -123,7 +125,7 @@ export class ListComponent implements OnInit{
       item.title.trim().toLocaleLowerCase().includes(search?.toLocaleLowerCase() || '') ||
       item.status.trim().toLocaleLowerCase().includes(this.searchText?.toLocaleLowerCase() || '') || 
       item.priority.trim().toLocaleLowerCase().includes(this.searchText?.toLocaleLowerCase() || '') || 
-      item.type.trim().toLocaleLowerCase().includes(this.searchText?.toLocaleLowerCase() || '')
+      item.category.trim().toLocaleLowerCase().includes(this.searchText?.toLocaleLowerCase() || '')
     );
     this.calculateFirstAndLastItems();
     this.page = 1;//if filter applied on other pages, shows empty list and records exist only on first page

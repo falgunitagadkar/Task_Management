@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IGoogleLogin, ILoginRequest } from '../components/login/models/login';
+import { IGoogleLogin, ILoginRequest } from '../models/login';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, filter, map, Observable, of, take, tap, throwError } from 'rxjs';
-import { environment } from '../environments/environment';
-import { BaseResponseModel } from '../app/core/models';
+import { environment } from '../../../environments/environment';
+import { BaseResponseModel } from '../models/generic_models';
 
 @Injectable({
   providedIn: 'root',
