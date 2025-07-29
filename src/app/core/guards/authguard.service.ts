@@ -25,7 +25,7 @@ export class AuthGuardService implements CanActivate {
         const isPublicPage = state.url === '/login' || state.url === '/';
         if (isPublicPage) {
           if (isLoggedIn) {
-            return of(this.router.createUrlTree(['/list']));
+            return of(this.router.createUrlTree(['/tasks']));
           }
          
           return of(true);

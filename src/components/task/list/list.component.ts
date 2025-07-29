@@ -10,7 +10,7 @@ import { DeleteDialogComponent } from '../../../shared/delete-dialog.component';
 import { TaskService } from '../../../services/tasks.service';
 import { NgIf, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { MatChipsModule, MatChip, MatChipSet } from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { NgxPaginationModule, } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,8 +23,6 @@ import { DatePipe } from '@angular/common';
     NgFor,
     RouterLink,
     MatChipsModule,
-    MatChip,
-    MatChipSet,
     MatDialogModule,
     NgxPaginationModule,
     FormsModule,

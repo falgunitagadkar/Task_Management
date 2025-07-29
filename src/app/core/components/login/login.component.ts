@@ -115,7 +115,7 @@ export class LoginComponent implements AfterViewInit {
     this.authService.googleLogin(googleObj).pipe(takeUntilDestroyed(this.destoryRef)).subscribe({
       next: (userExists) => {
         if (userExists) {
-          this.router.navigate(['/list']);
+          this.router.navigate(['/tasks']);
         }
       }
     })
@@ -147,7 +147,7 @@ export class LoginComponent implements AfterViewInit {
           if(userExists)
           {
             setTimeout(() => {
-              this.router.navigate(['/list']);
+              this.router.navigate(['/tasks']);
             }, 1000);
           }
         }
