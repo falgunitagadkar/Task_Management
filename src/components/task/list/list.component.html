@@ -1,4 +1,4 @@
-<div *ngIf="!noTasks" class="p-5">
+<div *ngIf="!noTasks">
     <div class="flex justify-end mb-4">
 
           <!-- Search -->
@@ -9,8 +9,8 @@
             + Add Task
           </button>
     </div>
-    <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200 border border-gray-300">
+    <div class="w-full overflow-x-auto">
+    <table class="w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden">
         <thead class="bg-gray-100">
             <tr>
               <th (click)="sortTasks(taskListFiltered,'title',!sortOrder)" class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Title
@@ -44,7 +44,11 @@
             <tr *ngFor="let task of taskListFiltered | paginate : { itemsPerPage: itemsEachPage, currentPage: page }">
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.title }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.status }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.priority }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><span class="text-sm font-medium px-2.5 py-0.5 rounded" [ngClass]="{
+                'bg-yellow-100 text-yellow-800': task.priority === 'Medium',
+                'bg-green-100 text-green-800': task.priority === 'Low',
+                'bg-red-100 text-red-800': task.priority === 'High'
+              }">{{task.priority}}</span></td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ task.category }}</td>
               <!-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                 <mat-chip-set>
@@ -62,7 +66,7 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                 <div class="d-flex space-x-2">
-                <button class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md" [routerLink]="['/edit-task',task.id]" *ngIf="task.status !== 'Completed'">Edit</button>
+                <button class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md" [routerLink]="['/list/edit-task',task.id]" *ngIf="task.status !== 'Completed'">Edit</button>
                 <button class="bg-gray-500 text-white px-4 py-1.5 text-sm font-medium rounded-md" (click)="deleteClicked(task.id)">Delete</button>
                 </div>
               </td>

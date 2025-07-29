@@ -2,15 +2,14 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './core/components/login/login.component';
 import { LayoutComponent } from './core/components/layout/layout.component';
 import { AuthGuardService } from './core/guards/authguard.service';
-import { AddTaskComponent } from '../components/add-task/add-task.component';
-import { ListComponent } from '../components/list/list.component';
+import { ListComponent } from '../components/task/list/list.component';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
-import { LandingPageComponent } from './core/components/landing-page/landing-page.component';
+
 
 export const routes: Routes = [
     {   
         path:'' , 
-        component:LandingPageComponent, 
+        loadComponent: () => import('./core/components/landing-page/landing-page.component').then(m => m.LandingPageComponent), 
         pathMatch:'full',
         canActivate: [AuthGuardService] 
     },
@@ -19,8 +18,8 @@ export const routes: Routes = [
         component:LayoutComponent,
         canActivate: [AuthGuardService],
         children: [
-            { path: 'list', 
-              component: ListComponent,
+            { path: 'list',
+              loadComponent : () => import('../components/task/task-wrapper/task-wrapper.component').then(m => m.TaskWrapperComponent), 
             },
             {
                 path: 'dashboard',
@@ -32,11 +31,11 @@ export const routes: Routes = [
             },
             { 
                 path: 'list/add-task', 
-                component: AddTaskComponent 
+                loadComponent: () => import('../components/add-task/add-task.component').then(m => m.AddTaskComponent)
             },
             {  
-                path: 'edit-task/:id',
-                component: AddTaskComponent
+                path: 'list/edit-task/:id',
+                loadComponent: () => import('../components/add-task/add-task.component').then(m => m.AddTaskComponent)
             }
           ],
     },
