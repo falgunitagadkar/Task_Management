@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ITask } from '../../models/tasks';
+import { ITask } from '../../../models/tasks';
 import { NgClass } from '@angular/common';
 import {
   MatDialog,
   MatDialogRef,
   MatDialogModule,
 } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '../../shared/delete-dialog.component';
-import { TaskService } from '../../services/tasks.service';
+import { DeleteDialogComponent } from '../../../shared/delete-dialog.component';
+import { TaskService } from '../../../services/tasks.service';
 import { NgIf, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatChipsModule, MatChip, MatChipSet } from '@angular/material/chips';
@@ -62,7 +62,7 @@ export class ListComponent implements OnInit{
 
   getTasks() {
       this.taskService
-          .getTaskListByUserId()
+          .getTaskList()
           .subscribe((response) => {
             this.taskList = this.sortTasks(response.data.records,this.sortBy,this.sortOrder);
             this.taskListFiltered = this.taskList;
@@ -70,7 +70,7 @@ export class ListComponent implements OnInit{
           })
   }
 
-  deleteClicked(id: number) {
+  deleteClicked(id: string) {
     this.dialogRef = this.dialog.open(DeleteDialogComponent, {
       height: '200px',
       width: '250px',
@@ -83,8 +83,8 @@ export class ListComponent implements OnInit{
     });
   }
 
-  deleteTask(id: number) {
-    this.taskService.deleteTaskById(id.toString()).subscribe({
+  deleteTask(id: string) {
+    this.taskService.deleteTaskById(id).subscribe({
       next: () => {
         this.getTasks();
       },

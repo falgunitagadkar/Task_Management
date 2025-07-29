@@ -1,0 +1,61 @@
+<div
+    class="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden transition-opacity duration-300"
+    *ngIf="isOpen"
+    (clickkeyup)="toggleSidebar()"
+  ></div>
+
+<aside id="sidebar" 
+class="absolute h-full left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300
+         md:relative md:translate-x-0 md:flex md:flex-col md:w-64 md:shadow-none"
+  [ngClass]="{
+    'translate-x-0': isOpen,
+    '-translate-x-full': !isOpen
+  }"
+>
+<div class="flex-1 flex flex-col justify-between">
+    <!-- Top: Logo + Navigation -->
+    <div class="border-r border-gray-200">
+      <div class="p-3 border-b border-gray-200">
+        <h1 class="text-2xl font-bold text-indigo-600 tracking-tight">TaskStack</h1>
+      </div>
+
+      <nav class="mt-4">
+        <ul class="space-y-1 px-4">
+          <li>
+            <a routerLink="/dashboard" routerLinkActive="bg-indigo-100 text-indigo-600" class="flex items-center gap-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 transition group">
+               <i class="fa-solid fa-grip w-5 h-5 text-gray-400 group-hover:text-indigo-600"></i>
+              <span class="font-medium">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/list"  routerLinkActive="bg-indigo-100 text-indigo-600" class="flex items-center gap-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 transition group">
+              <i class="fa-solid fa-list-check w-5 h-5 text-gray-400 group-hover:text-indigo-600"></i>
+              <span class="font-medium">Tasks</span>
+            </a>
+          </li>
+          <li>
+            <a href="/templates"  routerLinkActive="bg-indigo-100 text-indigo-600" class="flex items-center gap-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 transition group">
+                <i class="fa-regular fa-calendar w-5 h-5 text-gray-400 group-hover:text-indigo-600"></i>
+              <span class="font-medium">Templates</span>
+            </a>
+          </li>
+          <li>
+            <a href="/settings"  routerLinkActive="bg-indigo-100 text-indigo-600" class="flex items-center gap-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 transition group">
+              <i class="fa-solid fa-gear w-5 h-5 text-gray-400 group-hover:text-indigo-600"></i>
+              <span class="font-medium">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Bottom: Upgrade CTA -->
+    <div class="p-4 border-t border-gray-200">
+        <a href="/upgrade"
+         class="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg block w-full text-center py-2 px-4 font-semibold shadow-sm transition-colors">
+        🚀 Upgrade to Pro
+      </a>
+    </div>
+    </div>
+  </aside>
+

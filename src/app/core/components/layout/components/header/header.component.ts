@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 import { Router,RouterModule } from '@angular/router';
 
 @Component({
@@ -13,7 +13,8 @@ import { Router,RouterModule } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
+  @Output() toggleSidebar = new EventEmitter<void>();
+  
   constructor(private authService : AuthService, private router : Router){}
 
   logout() { 

@@ -1,0 +1,102 @@
+<form *ngIf="addTaskForm" [formGroup]="addTaskForm" (submit)="submit()">  
+    <div class="grid md:grid-cols-2 gap-6">
+       <div>
+           <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+           <mat-form-field appearance="outline" class="w-full">
+             <input matInput type="text" id="title" formControlName="title">
+             @if (f['title'].hasError('maxLength') && !f['title'].hasError('required')) {
+                 <mat-error>Length exceeds 500 characters</mat-error>
+               }
+               @if (f['title'].hasError('required')) {
+                 <mat-error>Title is required</mat-error>
+               }
+           </mat-form-field>
+       </div>
+         
+       <div>
+           <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+           <mat-form-field appearance="outline" class="small-form-field w-full">
+               <mat-select id="status" matNativeControl required formControlName="status">
+                 <mat-option value="Pending">Pending</mat-option>
+                 <mat-option value="Completed">Completed</mat-option>
+                 <mat-option value="OverDue">Over Due</mat-option>
+               </mat-select>
+                 @if (f['status'].hasError('required')) {
+                   <mat-error>Status is required</mat-error>
+                 }
+             </mat-form-field>
+       </div>
+     </div>
+       
+
+     <div class="grid md:grid-cols-3 gap-6">
+       <div>
+         <label for="priority" class="block text-sm font-medium text-gray-700">Priority</label>
+         <mat-form-field appearance="outline" class="small-form-field w-full">
+         <mat-select matNativeControl required id="priority" formControlName="priority">
+           <mat-option value="High">High</mat-option>
+           <mat-option value="Medium">Medium</mat-option>
+           <mat-option value="Low">Low</mat-option>
+         </mat-select>
+         @if (f['priority'].hasError('required')) {
+             <mat-error>Priority is required</mat-error>
+           }
+       </mat-form-field>
+       </div> 
+       
+       
+        <div>
+         <label for="dueDate" class="block text-sm font-medium text-gray-700">Due Date</label>
+         <mat-form-field appearance="outline" class="small-form-field w-full">
+           <input matInput id="dueDate" [matDatepicker]="picker" formControlName="dueDate">
+           <mat-hint>MM/DD/YYYY</mat-hint>
+           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+           <mat-datepicker #picker></mat-datepicker>
+           @if (f['dueDate'].hasError('required')) {
+             <mat-error>DueDate is required</mat-error>
+           }
+         </mat-form-field>
+        </div>
+
+         <div>
+         <label for="category" class="block text-sm font-medium text-gray-700">Category </label>      
+         <mat-form-field appearance="outline" class="small-form-field w-full">
+           <mat-select matNativeControl required id="category" formControlName="category">
+             <mat-option value="Personal">Personal</mat-option>
+             <mat-option value="Hobby">Hobby</mat-option>
+             <mat-option value="Office">Office</mat-option>
+           </mat-select>
+           @if (f['category'].hasError('required')) {
+             <mat-error>Category is required</mat-error>
+           }
+         </mat-form-field>
+         </div>
+     </div> 
+     
+     <div *ngIf = "isPro">
+       <label for="label" class="block text-sm font-medium text-gray-700">Labels</label>
+       <mat-form-field appearance="outline" class="small-form-field w-full">
+         <mat-chip-grid #labelChipGrid aria-label="Enter labels">
+         @for (keyword of addTaskForm.controls['labels'].value; track keyword) {
+           <mat-chip-row (removed)="removeLabel(keyword)">
+             {{keyword}}
+           <button matChipRemove>
+             <mat-icon>cancel</mat-icon>
+           </button>
+           </mat-chip-row>
+         }
+         </mat-chip-grid>
+         <input
+           placeholder="New label..."
+           id="label"
+           [matChipInputFor]="labelChipGrid"
+           (matChipInputTokenEnd)="addLabel($event)"
+         />
+       </mat-form-field>
+     </div> 
+
+       <div class="flex justify-end space-x-2">
+       <button type="submit" class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md">{{this.isEdit ? 'Save' : 'Add'}}</button>
+       <button type="button" class="bg-gray-500 text-white px-4 py-1.5 text-sm font-medium rounded-md" routerLink="/list">Cancel</button>
+       </div>
+ </form>

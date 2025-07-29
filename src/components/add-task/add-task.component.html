@@ -1,6 +1,6 @@
-<div class="p-6 bg-white rounded-xl shadow-lg max-w-5xl mx-auto mt-10">
+<!-- <div class="p-6 bg-white rounded-xl shadow-lg max-w-6xl mx-auto mt-10">
     <h4 class="text-xl font-semibold mb-6 text-indigo-700">{{this.isEdit ? 'Edit Task' : 'Add Task'}}</h4>
-    <form [formGroup]="addTaskForm" class="" (submit)="submit()">  
+    <form *ngIf="addTaskForm" [formGroup]="addTaskForm" (submit)="submit()">  
        <div class="grid md:grid-cols-2 gap-6">
           <div>
               <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
@@ -19,9 +19,9 @@
               <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
               <mat-form-field appearance="outline" class="small-form-field w-full">
                   <mat-select id="status" matNativeControl required formControlName="status">
-                    <mat-option value="Pending" selected>Pending</mat-option>
+                    <mat-option value="Pending">Pending</mat-option>
                     <mat-option value="Completed">Completed</mat-option>
-                    <mat-option value="Over Due">Over Due</mat-option>
+                    <mat-option value="OverDue">Over Due</mat-option>
                   </mat-select>
                     @if (f['status'].hasError('required')) {
                       <mat-error>Status is required</mat-error>
@@ -75,7 +75,7 @@
             </div>
         </div> 
         
-        <!-- <div>
+        <div *ngIf = "isPro">
           <label for="label" class="block text-sm font-medium text-gray-700">Labels</label>
           <mat-form-field appearance="outline" class="small-form-field w-full">
             <mat-chip-grid #labelChipGrid aria-label="Enter labels">
@@ -95,11 +95,52 @@
               (matChipInputTokenEnd)="addLabel($event)"
             />
           </mat-form-field>
-        </div>  -->
+        </div> 
 
           <div class="flex justify-end space-x-2">
           <button type="submit" class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md">{{this.isEdit ? 'Save' : 'Add'}}</button>
           <button type="button" class="bg-gray-500 text-white px-4 py-1.5 text-sm font-medium rounded-md" routerLink="/list">Cancel</button>
           </div>
     </form>
+</div> -->
+
+<div class="max-w-6xl mx-auto p-4">
+  <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+    
+    <!-- Left Panel -->
+    <div class="xl:col-span-1 space-y-6">
+      <!-- <app-attachments [attachments]="task.id"></app-attachments> -->
+    </div>
+
+    <!-- Right Panel -->
+    <div class="xl:col-span-2 space-y-6">
+      <!-- <app-task-form [taskId]="task.id"></app-task-form> -->
+
+      <!-- TABS -->
+      <div class="border-b border-gray-200">
+        <nav class="-mb-px flex gap-4">
+          <button
+            (click)="activeTab = 'comments'"
+            [class.border-blue-500]="activeTab === 'comments'"
+            class="px-4 py-2 font-medium text-sm border-b-2 hover:border-blue-300"
+          >
+            Comments
+          </button>
+          <button
+            (click)="activeTab = 'activity'"
+            [class.border-blue-500]="activeTab === 'activity'"
+            class="px-4 py-2 font-medium text-sm border-b-2 hover:border-blue-300"
+          >
+            Activity
+          </button>
+        </nav>
+      </div>
+
+      <!-- TAB CONTENT -->
+      <div>
+        <!-- <app-comments *ngIf="activeTab === 'comments'" [taskId]="task.id"></app-comments> -->
+        <!-- <app-activity *ngIf="activeTab === 'activity'" [taskId]="task.id"></app-activity> -->
+      </div>
+    </div>
+  </div>
 </div>

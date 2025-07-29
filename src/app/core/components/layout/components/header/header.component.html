@@ -1,0 +1,26 @@
+<header class="bg-white shadow-sm sticky top-0 z-10">
+  <div class="px-4 py-3 flex justify-between md:justify-end items-center max-w-full overflow-hidden">
+
+    <button id="menuButton" class="bg-white md:hidden p-4 focus:outline-none" (click)="toggleSidebar.emit()">
+      <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
+           viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+    
+
+    <!-- Right: Actions -->
+    <div class="flex items-center space-x-4">
+
+      <img alt="abc" src="../../assets/images/profile-photo.jpg" class="w-8 h-8 shrink-0 rounded-full bg-gray-300 flex items-center justify-center" [matMenuTriggerFor]="menu" aria-label="profile menu">
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+    </div>
+  </div>
+</header>
