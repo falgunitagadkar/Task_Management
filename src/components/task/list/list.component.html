@@ -5,7 +5,7 @@
           <input type="text" placeholder="Search..." id="title" [(ngModel)]="searchText" (input)="filterItems()" class="border px-2 py-1 me-2 rounded-md text-sm focus:ring-indigo-500 focus:outline-none" />
       
           <!-- Add Task -->
-          <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-md text-sm font-medium" routerLink="/list/add-task">
+          <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-md text-sm font-medium" routerLink="/tasks/add-task">
             + Add Task
           </button>
     </div>
@@ -66,7 +66,7 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                 <div class="d-flex space-x-2">
-                <button class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md" [routerLink]="['/list/edit-task',task.id]" *ngIf="task.status !== 'Completed'">Edit</button>
+                <button class="bg-indigo-600 text-white px-4 py-1.5 text-sm font-medium rounded-md" [routerLink]="['/tasks/edit-task',task.id]" *ngIf="task.status !== 'Completed'">Edit</button>
                 <button class="bg-gray-500 text-white px-4 py-1.5 text-sm font-medium rounded-md" (click)="deleteClicked(task.id)">Delete</button>
                 </div>
               </td>

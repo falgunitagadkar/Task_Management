@@ -86,7 +86,7 @@ export class TaskFormComponent implements OnInit{
         {
             this.taskService.addTask(task).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
               this.addTaskForm.reset();
-              this.router.navigate(['/list']);
+              this.router.navigate(['/tasks']);
               this.toast.success(MESSAGE_CONSTANTS.TASK_ADDED);
             })      
 
@@ -97,7 +97,7 @@ export class TaskFormComponent implements OnInit{
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(() =>{
               this.addTaskForm.reset();
-              this.router.navigate(['/list'])
+              this.router.navigate(['/tasks'])
               this.toast.success(MESSAGE_CONSTANTS.TASK_UPDATED);
             })
         }
