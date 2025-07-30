@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KanbanColumnComponent } from './components/kanban-column/kanban-column.component';
 import { KanbanColumn } from './models/kanban-column.model';
 import { TaskService } from '../../../services/tasks.service';
+import { TASK_STATUS } from '../../../app/core/constants/constants';
 
 @Component({
   selector: 'app-kanban',
@@ -27,9 +28,9 @@ export class KanbanComponent implements OnInit{
     {
       this.taskService.getTaskList().subscribe((response) => {
         const task = response.data.records;
-        this.columns.pending = task.filter(t => t.status === 'Pending');
-        this.columns.completed = task.filter(t => t.status === 'Completed');
-        this.columns.overdue = task.filter(t => t.status === 'OverDue');
+        this.columns.pending = task.filter(t => t.status === TASK_STATUS.PENDING);
+        this.columns.completed = task.filter(t => t.status === TASK_STATUS.COMPLETED);
+        this.columns.overdue = task.filter(t => t.status === TASK_STATUS.OVERDUE);
       })
     }
 

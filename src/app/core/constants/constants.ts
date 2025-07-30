@@ -12,3 +12,15 @@ export const MESSAGE_CONSTANTS = {
     TASK_REMINDER_CANCELLED: "Reminder cancelled for the task",
     ERROR_GENERIC: "An error occurred, please try again later"
 }
+
+export const TASK_PRIORITY = {
+    HIGH: "High",
+    MEDIUM: "Medium",
+    LOW: "Low"
+}
+
+export const TASK_STATUS = {
+    PENDING : "Pending",
+    OVERDUE : "OverDue",
+    COMPLETED : "Completed",
+}

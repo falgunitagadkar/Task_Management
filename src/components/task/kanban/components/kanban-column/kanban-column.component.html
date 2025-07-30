@@ -1,14 +1,18 @@
-<div class="p-4 min-w-[300px] max-w-[400px] flex-1">
+<div class="p-4 w-full flex-1">
     <h2 class="font-semibold text-xl mb-4 text-center">{{ title }}</h2>
   
     <div class="space-y-4">
-      <div *ngFor="let task of tasks" class="bg-white rounded-md p-3 shadow hover:shadow-lg transition">
+      <div *ngFor="let task of tasks" class="bg-white rounded-md p-3 shadow hover:shadow-lg transition border-l-4" [ngClass]="{
+        'border-blue-500': task.status === TASK_STATUS.PENDING,
+        'border-red-500': task.status === TASK_STATUS.OVERDUE,
+        'border-green-500': task.status === TASK_STATUS.COMPLETED
+      }">
         <div class="flex justify-between">
             <div class="font-medium">{{ task.title }}</div>
             <div class="rounded px-2 py-1 text-sm" [ngClass]="{
-                'bg-yellow-100 text-yellow-800': task.priority === 'Medium',
-                'bg-green-100 text-green-800': task.priority === 'Low',
-                'bg-red-100 text-red-800': task.priority === 'High'
+                'bg-yellow-100 text-yellow-800': task.priority === TASK_PRIORITY.MEDIUM,
+                'bg-green-100 text-green-800': task.priority === TASK_PRIORITY.LOW,
+                'bg-red-100 text-red-800': task.priority === TASK_PRIORITY.HIGH
               }">{{task.priority}}</div>
         </div>
         

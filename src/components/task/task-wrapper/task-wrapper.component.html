@@ -18,6 +18,49 @@
       🗂️ Kanban
     </button>
   </div>
+
+<div class="flex justify-between">
+  <div class="flex p-4 space-x-2 mt-2">
+      <div>
+        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+        <input 
+          type="text"
+          id = "title"
+          placeholder="Search tasks..."
+          class="px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+      </div>
+
+      <div>
+        <label for="priority" class="block text-sm font-medium text-gray-700">Priority</label>
+        <select id = "priority" class="px-2 py-2 w-25 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="">All</option>
+          <option value={{TASK_PRIORITY.HIGH}}>High</option>
+          <option value={{TASK_PRIORITY.MEDIUM}}>Medium</option>
+          <option value={{TASK_PRIORITY.LOW}}>Low</option>
+        </select> 
+      </div>
+
+        <div>
+          <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+          <select id = "status" class="px-2 py-2 border w-25 border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option value="">All</option>
+            <option value={{TASK_STATUS.PENDING}}>Pending</option>
+            <option value={{TASK_STATUS.OVERDUE}}>Overdue</option>
+            <option value={{TASK_STATUS.COMPLETED}}>Completed</option>
+          </select> 
+        </div>
+
+        <div class="flex items-center mt-4">
+        <button class="bg-indigo-600 rounded-md text-sm text-white px-4 py-2 font-medium">Search</button>
+        </div>
+  </div>
+
+  <div class="flex items-center mt-5">
+    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-md text-sm font-medium" routerLink="/tasks/add-task">
+      + Add Task
+    </button>
+  </div>
+</div>
   
   <app-list *ngIf="!isKanban"></app-list>
   <app-kanban *ngIf="isKanban"></app-kanban>
